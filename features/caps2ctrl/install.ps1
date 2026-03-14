@@ -9,17 +9,11 @@ $DotfilesRoot = Split-Path -Parent (Split-Path -Parent $ScriptDir)
 
 . "$DotfilesRoot\core\lib\env.ps1"
 . "$DotfilesRoot\core\lib\logger.ps1"
-. "$DotfilesRoot\core\lib\state.ps1"
 . "$DotfilesRoot\core\lib\runner.ps1"
 
 $FeatureName = "caps2ctrl"
 
 Log-Task "Installing feature: $FeatureName"
-
-# Ensure state is initialized
-if (-not (State-Init)) {
-    exit 1
-}
 
 # Check if running as Administrator
 if (-not (Test-Administrator)) {
@@ -65,7 +59,6 @@ if ($currentValue -and $currentValue.$registryName) {
     
     if ($isSame) {
         Log-Info "Caps Lock to Ctrl mapping is already configured"
-        State-AddFile -Feature $FeatureName -File $registryPath
         Log-Success "Feature $FeatureName installed successfully (already configured)"
         exit 0
     } else {
@@ -91,9 +84,6 @@ try {
     if ($process.ExitCode -ne 0) {
         throw "regedit failed with exit code $($process.ExitCode)"
     }
-    
-    # Track the registry key in state
-    State-AddFile -Feature $FeatureName -File $registryPath
     
     Log-Success "Registry settings applied successfully"
     Log-Warn "You need to restart your computer for the changes to take effect"
