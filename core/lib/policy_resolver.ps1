@@ -43,13 +43,13 @@ function Invoke-PolicyResolverRun {
     foreach ($canonicalId in $featureNames) {
         $drgFeature = $drg.features.PSObject.Properties[$canonicalId].Value
         $rawResources = @()
-        if ($drgFeature.PSObject.Properties['resources']?.Value) {
+        if ((_Prop $drgFeature 'resources')) {
             $rawResources = @($drgFeature.resources)
         }
 
         $resolvedResources = @()
         foreach ($res in $rawResources) {
-            $kind = $res.PSObject.Properties['kind']?.Value
+            $kind = (_Prop $res 'kind')
 
             # Build a copy of the resource as an ordered hashtable
             $updated = [ordered]@{}
@@ -59,13 +59,13 @@ function Invoke-PolicyResolverRun {
 
             switch ($kind) {
                 "package" {
-                    $name    = $res.PSObject.Properties['name']?.Value
+                    $name    = (_Prop $res 'name')
                     $backend = Resolve-BackendFor -Kind "package" -Name $name 2>$null
                     if (-not $backend) { $backend = "unknown" }
                     $updated['desired_backend'] = $backend
                 }
                 "runtime" {
-                    $name    = $res.PSObject.Properties['name']?.Value
+                    $name    = (_Prop $res 'name')
                     $backend = Resolve-BackendFor -Kind "runtime" -Name $name 2>$null
                     if (-not $backend) { $backend = "unknown" }
                     $updated['desired_backend'] = $backend

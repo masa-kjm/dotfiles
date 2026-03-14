@@ -52,8 +52,8 @@ function _Executor-GetFeatureMode {
 
     try {
         $metaFile = _Executor-ResolveFeature -Feature $Feature
-        $mode = & yq eval '.mode // "declarative"' $metaFile 2>$null
-        if (-not [string]::IsNullOrWhiteSpace($mode)) { return $mode.Trim() }
+        $mode = & yq eval '.mode' $metaFile 2>$null
+        if (-not [string]::IsNullOrWhiteSpace($mode) -and $mode -ne 'null') { return $mode.Trim() }
     } catch {}
     return "declarative"
 }
@@ -131,7 +131,9 @@ function _Executor-PkgManaged {
         if ([string]::IsNullOrWhiteSpace($f) -or -not (Test-Path $f)) { continue }
 
         # yq v4: select the entry matching the package name (string or map), read .managed
-        $flag = & yq eval ".packages // [] | .[] | select((.name // .) == `"$PkgName`") | .managed" $f 2>$null |
+        # Use env(YQ_PKG) to avoid PS 5.1 double-quote stripping on native exe args
+        $env:YQ_PKG = $PkgName
+        $flag = & yq eval '.packages // [] | .[] | select((.name // .) == env(YQ_PKG)) | .managed' $f 2>$null |
                     Select-Object -First 1
         if ($flag -eq "false") { return $false }
     }

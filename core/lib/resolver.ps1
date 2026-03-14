@@ -154,7 +154,7 @@ function Invoke-InjectCapabilityDeps {
                 }
             }
 
-            Log-Info "  $feature: capability '$cap' provided by: $($found -join ', ')"
+            Log-Info "  ${feature}: capability '$cap' provided by: $($found -join ', ')"
         }
     }
 

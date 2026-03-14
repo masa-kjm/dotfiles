@@ -477,7 +477,9 @@ function _Invoke-MigrateV1ToV2 {
             if (Test-Path $filePath -PathType Any) {
                 $item = Get-Item -Path $filePath -Force -ErrorAction SilentlyContinue
                 if ($null -ne $item) {
-                    if ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) {
+                    # RegistryKey objects have no .Attributes; only check on filesystem items.
+                    if (($item -is [System.IO.FileSystemInfo]) -and
+                        ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint)) {
                         $entryType = "symlink"
                         $op        = "link"
                     } elseif ($item.PSIsContainer) {
@@ -584,7 +586,9 @@ function State-AddFile {
     if (Test-Path $File -PathType Any) {
         $item = Get-Item -Path $File -Force -ErrorAction SilentlyContinue
         if ($null -ne $item) {
-            if ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) {
+            # RegistryKey objects have no .Attributes; only check on filesystem items.
+            if (($item -is [System.IO.FileSystemInfo]) -and
+                ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint)) {
                 $entryType = "symlink"
                 $op        = "link"
             } elseif ($item.PSIsContainer) {

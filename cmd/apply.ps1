@@ -25,6 +25,11 @@ $global:DOTFILES_ROOT = (Get-Item "$ScriptRoot\..").FullName
 . "$global:DOTFILES_ROOT\core\lib\source_registry.ps1"
 . "$global:DOTFILES_ROOT\core\lib\feature_index.ps1"
 . "$global:DOTFILES_ROOT\core\lib\compiler.ps1"
+. "$global:DOTFILES_ROOT\core\lib\backend_registry.ps1"
+. "$global:DOTFILES_ROOT\core\lib\planner.ps1"
+. "$global:DOTFILES_ROOT\core\lib\policy_resolver.ps1"
+. "$global:DOTFILES_ROOT\core\lib\declarative_executor.ps1"
+. "$global:DOTFILES_ROOT\core\lib\executor.ps1"
 . "$global:DOTFILES_ROOT\core\lib\resolver.ps1"
 . "$global:DOTFILES_ROOT\core\lib\orchestrator.ps1"
 

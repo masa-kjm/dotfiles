@@ -130,14 +130,16 @@ function Get-FeatureConfig {
     $featName = if ($Feature -match '/') { $Feature -replace '^[^/]+/', '' } else { $Feature }
 
     try {
-        # Bracket notation handles names with slashes or special characters
-        $config = $script:ProfileData | & yq eval ".features[\"${featName}\"]" -o=json - 2>$null
+        # Use env(YQ_KEY) to avoid PS 5.1 double-quote stripping on native exe args
+        $env:YQ_KEY = $featName
+        $config = $script:ProfileData | & yq eval '.features[env(YQ_KEY)]' -o=json - 2>$null
         if ($LASTEXITCODE -eq 0 -and $config -and $config -ne 'null') {
             return ($config | ConvertFrom-Json)
         }
         # Canonical ID fallback: try the full canonical key in case profile uses canonical IDs
         if ($featName -ne $Feature) {
-            $config = $script:ProfileData | & yq eval ".features[\"${Feature}\"]" -o=json - 2>$null
+            $env:YQ_KEY = $Feature
+            $config = $script:ProfileData | & yq eval '.features[env(YQ_KEY)]' -o=json - 2>$null
             if ($LASTEXITCODE -eq 0 -and $config -and $config -ne 'null') {
                 return ($config | ConvertFrom-Json)
             }

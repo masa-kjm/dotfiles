@@ -123,7 +123,8 @@ function Canonical-Id-Validate {
     }
 
     # Must contain exactly one "/"
-    $slashCount = ($CanonicalId.ToCharArray() | Where-Object { $_ -eq '/' }).Count
+    # Use -split which always returns an array (PS 5.1 safe; Where-Object returns $null on no match)
+    $slashCount = ($CanonicalId -split '/').Count - 1
     if ($slashCount -ne 1) {
         return $false
     }

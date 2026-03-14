@@ -54,14 +54,18 @@ function _FeatureIndex-ParseEntry {
     )
 
     # ── base fields ───────────────────────────────────────────────────────────
-    $rawSv = & yq eval '.spec_version // 1' $FeatureYaml 2>$null
+    # Trim all yq scalar output: Windows yq appends \r\n which breaks comparisons.
+    $rawSv = (& yq eval '.spec_version // 1' $FeatureYaml 2>$null)
+    if ($rawSv) { $rawSv = $rawSv.Trim() }
     $specVersion = if ($rawSv -match '^\d+$') { [int]$rawSv } else { 1 }
 
-    $mode        = & yq eval '.mode // "declarative"' $FeatureYaml 2>$null
-    if (-not $mode -or $mode -eq "null") { $mode = "declarative" }
+    $mode        = (& yq eval '.mode' $FeatureYaml 2>$null)
+    if ($mode) { $mode = $mode.Trim() }
+    if (-not $mode -or $mode -eq 'null') { $mode = 'declarative' }
 
-    $description = & yq eval '.description // ""' $FeatureYaml 2>$null
-    if (-not $description -or $description -eq "null") { $description = "" }
+    $description = (& yq eval '.description' $FeatureYaml 2>$null)
+    if ($description) { $description = $description.Trim() }
+    if (-not $description -or $description -eq 'null') { $description = '' }
 
     # ── platform override ─────────────────────────────────────────────────────
     $platformYaml = _FeatureIndex-PlatformYaml -FeatureDir $FeatureDir

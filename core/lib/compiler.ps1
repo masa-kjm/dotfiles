@@ -34,21 +34,31 @@ function _Compiler-ResourceId {
     )
 
     # Use explicit id if present
-    $existingId = $ResourceObj.PSObject.Properties['id']?.Value
+    $existingId = if ($ResourceObj.PSObject.Properties['id']) {
+        $ResourceObj.PSObject.Properties['id'].Value
+    }
     if ($existingId -and $existingId -ne "null") { return $existingId }
 
     switch ($Kind) {
         "package" {
-            $name = $ResourceObj.PSObject.Properties['name']?.Value
+            $name = if ($ResourceObj.PSObject.Properties['name']) {
+                $ResourceObj.PSObject.Properties['name'].Value
+            }
             return "package:$name"
         }
         "runtime" {
-            $name = $ResourceObj.PSObject.Properties['name']?.Value
+            $name = if ($ResourceObj.PSObject.Properties['name']) {
+                $ResourceObj.PSObject.Properties['name'].Value
+            }
             return "runtime:$name"
         }
         "fs" {
-            $target = $ResourceObj.PSObject.Properties['target']?.Value
-            $path   = $ResourceObj.PSObject.Properties['path']?.Value
+            $target = if ($ResourceObj.PSObject.Properties['target']) {
+                $ResourceObj.PSObject.Properties['target'].Value
+            }
+            $path   = if ($ResourceObj.PSObject.Properties['path']) {
+                $ResourceObj.PSObject.Properties['path'].Value
+            }
             $p      = if ($target) { $target } elseif ($path) { $path } else { "unknown" }
             return "fs:$([System.IO.Path]::GetFileName($p))"
         }
@@ -67,7 +77,9 @@ function _Compiler-ResolveResource {
         [Parameter(Mandatory=$true)] [object]$ResourceObj
     )
 
-    $kind = $ResourceObj.PSObject.Properties['kind']?.Value
+    $kind = if ($ResourceObj.PSObject.Properties['kind']) {
+        $ResourceObj.PSObject.Properties['kind'].Value
+    }
     if (-not $kind -or $kind -eq "null") {
         throw "resource missing 'kind' in $CanonicalId"
     }
@@ -133,9 +145,12 @@ function Invoke-FeatureCompilerRun {
             }
 
             # spec must exist with at least one resource
+            # Use ForEach-Object to enumerate: PS5.1 ConvertFrom-Json returns ArrayList for JSON
+            # arrays, and @(ArrayList) wraps the list object itself rather than unwrapping items.
+            # Pipeline enumeration handles both Object[] and ArrayList correctly.
             $specResources = @()
             if ($entry.spec -and $entry.spec.resources) {
-                $specResources = @($entry.spec.resources)
+                $specResources = @($entry.spec.resources | ForEach-Object { $_ })
             }
             if ($specResources.Count -eq 0) {
                 Log-Error "Invoke-FeatureCompilerRun: declarative feature has no resources defined: $canonicalId"

@@ -4,11 +4,11 @@
 # without executing any changes. State is never modified.
 #
 # Usage:
-#   dotfiles.ps1 plan <profile.yaml> [--verbose]
+#   dotfiles.ps1 plan <profile.yaml> [--show-noop]
 #
 # Output:
 #   Actions that would be taken, colored by operation type.
-#   noop entries are hidden unless --verbose is specified.
+#   noop entries are hidden unless --show-noop is specified.
 #
 # Exit codes:
 #   0  — plan printed (may be all-noop)
@@ -19,7 +19,7 @@ param(
     [Parameter(Position = 0)]
     [string]$ProfileFile,
 
-    [switch]$Verbose
+    [switch]$ShowNoop
 )
 
 Set-StrictMode -Version Latest
@@ -51,7 +51,7 @@ if ($global:DOTFILES_PLATFORM -ne "windows") {
 
 function _Show-PlanUsage {
     Write-Host @"
-Usage: dotfiles.ps1 plan <profile.yaml> [-Verbose]
+Usage: dotfiles.ps1 plan <profile.yaml> [-ShowNoop]
 
 Show what 'apply' would do without making any changes.
 
@@ -59,7 +59,7 @@ Arguments:
   profile.yaml    Path to the profile file
 
 Options:
-  -Verbose        Also list noop (already up-to-date) features
+  -ShowNoop       Also list noop (already up-to-date) features
 
 Exit codes:
   0  Plan displayed successfully
@@ -67,7 +67,7 @@ Exit codes:
 
 Examples:
   dotfiles.ps1 plan profiles\windows.yaml
-  dotfiles.ps1 plan profiles\windows.yaml -Verbose
+  dotfiles.ps1 plan profiles\windows.yaml -ShowNoop
 "@
     exit 1
 }
@@ -154,7 +154,7 @@ function Format-Plan {
     if ($hasOutput) { Write-Host "" }
 
     $s = $plan.summary
-    $strengthen = if ($s.PSObject.Properties['strengthen']?.Value) { $s.strengthen } else { 0 }
+    $strengthen = if ((_Prop $s 'strengthen')) { $s.strengthen } else { 0 }
     Write-Host ("Summary: create={0}  destroy={1}  replace={2}  strengthen={3}  noop={4}  blocked={5}" -f `
         $s.create, $s.destroy, $s.replace, $strengthen, $s.noop, $s.blocked) -ForegroundColor White
     Write-Host ""
@@ -228,4 +228,4 @@ if (-not $planJson) {
 $planJson = Invoke-PlanInjectBlocked -PlanJson $planJson -BlockedExtraJson $_svResult.BlockedJson
 
 # Display
-Format-Plan -PlanJson $planJson -Profile $ProfileFile -ShowNoop $Verbose.IsPresent
+Format-Plan -PlanJson $planJson -Profile $ProfileFile -ShowNoop $ShowNoop.IsPresent

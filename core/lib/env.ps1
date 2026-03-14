@@ -55,6 +55,23 @@ if (-not (Get-Variable -Scope Global -Name DOTFILES_SOURCES_FILE -ErrorAction Si
 # Backend plugins directory
 $global:DOTFILES_BACKENDS_DIR = Join-Path $DOTFILES_ROOT "backends"
 
+# ---------------------------------------------------------------------------
+# PS 5.1 compatibility helpers
+#
+# _Prop  - null-safe PSObject property access  ($obj.PSObject.Properties[key]?.Value)
+# _Coal  - null-coalescing operator             ($a ?? $b)
+# ---------------------------------------------------------------------------
+function _Prop {
+    param($Obj, $Key)
+    $p = $Obj.PSObject.Properties[$Key]
+    if ($null -ne $p) { $p.Value } else { $null }
+}
+
+function _Coal {
+    param($a, $b)
+    if ($null -ne $a) { $a } else { $b }
+}
+
 # Policies directory and default policy file resolution
 $global:DOTFILES_POLICIES_DIR = Join-Path $global:DOTFILES_CONFIG_HOME "policies"
 if (-not (Get-Variable -Scope Global -Name DOTFILES_POLICY_FILE -ErrorAction SilentlyContinue) -and -not $env:DOTFILES_POLICY_FILE) {
