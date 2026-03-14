@@ -36,7 +36,7 @@ function _Scoop-Ensure {
         }
     }
 
-    Write-Log-Error "scoop backend: scoop not found"
+    Log-Error "scoop backend: scoop not found"
     return $false
 }
 
@@ -72,21 +72,21 @@ function Backend-InstallPackage {
     param([string]$Name, [string]$Version = "")
 
     if ([string]::IsNullOrWhiteSpace($Name)) {
-        Write-Log-Error "scoop: Backend-InstallPackage: name is required"
+        Log-Error "scoop: Backend-InstallPackage: name is required"
         return 1
     }
 
     if (-not (_Scoop-Ensure)) { return 1 }
 
     if (Backend-PackageExists -Name $Name) {
-        Write-Log-Info "scoop: package already installed: $Name"
+        Log-Info "scoop: package already installed: $Name"
         return 0
     }
 
-    Write-Log-Info "scoop: installing package: $Name"
+    Log-Info "scoop: installing package: $Name"
     scoop install $Name
     if ($LASTEXITCODE -ne 0) {
-        Write-Log-Error "scoop: install failed: $Name"
+        Log-Error "scoop: install failed: $Name"
         return 1
     }
 
@@ -100,21 +100,21 @@ function Backend-UninstallPackage {
     param([string]$Name, [string]$Version = "")
 
     if ([string]::IsNullOrWhiteSpace($Name)) {
-        Write-Log-Error "scoop: Backend-UninstallPackage: name is required"
+        Log-Error "scoop: Backend-UninstallPackage: name is required"
         return 1
     }
 
     if (-not (_Scoop-Ensure)) { return 1 }
 
     if (-not (Backend-PackageExists -Name $Name)) {
-        Write-Log-Info "scoop: package not installed: $Name"
+        Log-Info "scoop: package not installed: $Name"
         return 0
     }
 
-    Write-Log-Info "scoop: uninstalling package: $Name"
+    Log-Info "scoop: uninstalling package: $Name"
     scoop uninstall $Name
     if ($LASTEXITCODE -ne 0) {
-        Write-Log-Error "scoop: uninstall failed: $Name"
+        Log-Error "scoop: uninstall failed: $Name"
         return 1
     }
 
@@ -122,11 +122,11 @@ function Backend-UninstallPackage {
 }
 
 function Backend-InstallRuntime {
-    Write-Log-Error "scoop: runtime management is not supported; use the mise backend"
+    Log-Error "scoop: runtime management is not supported; use the mise backend"
     return 1
 }
 
 function Backend-UninstallRuntime {
-    Write-Log-Error "scoop: runtime management is not supported; use the mise backend"
+    Log-Error "scoop: runtime management is not supported; use the mise backend"
     return 1
 }

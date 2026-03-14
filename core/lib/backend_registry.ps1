@@ -154,7 +154,13 @@ function Load-Backend {
         throw "Backend plugin not found: $pluginFile"
     }
 
-    . $pluginFile  # dot-source into current scope
+    # Dot-source inside a function would confine definitions to function scope,
+    # making them invisible after Load-Backend returns.  Rewrite all plugin
+    # function declarations to "function global:*" so they persist in the global
+    # scope and remain callable from Backend-Call and from each other.
+    $pluginContent = [System.IO.File]::ReadAllText($pluginFile)
+    $pluginContent  = $pluginContent -replace '(?m)^function ([A-Za-z_])', 'function global:$1'
+    Invoke-Expression $pluginContent
 
     # Validate minimum contract
     if (-not (Get-Command "Backend-ApiVersion" -ErrorAction SilentlyContinue)) {
@@ -182,9 +188,8 @@ function Backend-Call {
         throw "No backend loaded"
     }
 
-    $func = "Backend-$($Op -replace '_', '-' | ForEach-Object { (Get-Culture).TextInfo.ToTitleCase($_) })"
-    # Normalised: backend_install_package → Backend-InstallPackage
-    $funcName = "Backend-" + (($Op -split '_') | ForEach-Object { (Get-Culture).TextInfo.ToTitleCase($_) }) -join ""
+    # Callers pass PascalCase op names (e.g. "PackageExists"); use directly.
+    $funcName = "Backend-$Op"
 
     if (-not (Get-Command $funcName -ErrorAction SilentlyContinue)) {
         Log-Error "Backend-Call: operation not defined: $funcName (loaded backend: $($script:BrLoadedBackend))"

@@ -26,7 +26,7 @@ function Backend-PackageExists {
     #>
     param([string]$Name, [string]$Version = "")
 
-    Write-Log-Warning "winget: Backend-PackageExists is a stub; returning false"
+    Log-Warn "winget: Backend-PackageExists is a stub; returning false"
     return $false
 }
 
@@ -42,7 +42,7 @@ function Backend-InstallPackage {
     #>
     param([string]$Name, [string]$Version = "")
 
-    Write-Log-Error "winget backend is not yet fully implemented"
+    Log-Error "winget backend is not yet fully implemented"
     return 1
 }
 
@@ -52,16 +52,16 @@ function Backend-UninstallPackage {
     #>
     param([string]$Name, [string]$Version = "")
 
-    Write-Log-Error "winget backend is not yet fully implemented"
+    Log-Error "winget backend is not yet fully implemented"
     return 1
 }
 
 function Backend-InstallRuntime {
-    Write-Log-Error "winget: runtime management is not supported; use the mise backend"
+    Log-Error "winget: runtime management is not supported; use the mise backend"
     return 1
 }
 
 function Backend-UninstallRuntime {
-    Write-Log-Error "winget: runtime management is not supported; use the mise backend"
+    Log-Error "winget: runtime management is not supported; use the mise backend"
     return 1
 }
