@@ -117,7 +117,7 @@ Assert-Equal "schema_version is 1" "1" "$sv"
 Write-Host "Invoke-FeatureIndexBuild: core/alpha entry"
 
 $idx = $fi | ConvertFrom-Json
-$alphaEntry = $idx.features.PSObject.Properties["core/alpha"]?.Value
+$alphaEntry = (_Prop $idx.features "core/alpha")
 Assert-NotNull "core/alpha entry is present" $alphaEntry
 Assert-Equal "core/alpha mode is script" "script" "$($alphaEntry.mode)"
 Assert-Equal "core/alpha is not blocked" "False" "$($alphaEntry.blocked)"
@@ -127,7 +127,7 @@ Assert-Equal "core/alpha description" "alpha feature" "$($alphaEntry.description
 
 Write-Host "Invoke-FeatureIndexBuild: bare dep normalization"
 
-$betaEntry = $idx.features.PSObject.Properties["core/beta"]?.Value
+$betaEntry = (_Prop $idx.features "core/beta")
 $dep0 = if ($betaEntry.dep.depends.Count -gt 0) { $betaEntry.dep.depends[0] } else { "null" }
 Assert-Equal "beta dep 'alpha' normalized to core/alpha" "core/alpha" "$dep0"
 
@@ -135,7 +135,7 @@ Assert-Equal "beta dep 'alpha' normalized to core/alpha" "core/alpha" "$dep0"
 
 Write-Host "Invoke-FeatureIndexBuild: unsupported spec_version blocked"
 
-$futureEntry = $idx.features.PSObject.Properties["core/future"]?.Value
+$futureEntry = (_Prop $idx.features "core/future")
 Assert-NotNull "core/future entry present" $futureEntry
 Assert-True "core/future is blocked" ([bool]$futureEntry.blocked)
 
@@ -166,7 +166,7 @@ Assert-Equal "core/alpha source_dir" "$FeatureRoot\alpha" $alphaDir
 
 Write-Host "Invoke-FeatureIndexBuild: provides and requires"
 
-$capEntry = $idx.features.PSObject.Properties["core/withcap"]?.Value
+$capEntry = (_Prop $idx.features "core/withcap")
 Assert-NotNull "core/withcap entry present" $capEntry
 $providesName = $capEntry.dep.provides[0].name
 Assert-Equal "withcap provides my_cap" "my_cap" "$providesName"
@@ -229,8 +229,8 @@ if (Test-Path "$REPO_ROOT\features") {
 $fiReal = Invoke-FeatureIndexBuild 2>$null
 $idxReal = $fiReal | ConvertFrom-Json
 
-$gitEntry  = $idxReal.features.PSObject.Properties["core/git"]?.Value
-$bashEntry = $idxReal.features.PSObject.Properties["core/bash"]?.Value
+$gitEntry  = (_Prop $idxReal.features "core/git")
+$bashEntry = (_Prop $idxReal.features "core/bash")
 
 Assert-NotNull "real core/git is in index" $gitEntry
 Assert-NotNull "real core/bash is in index" $bashEntry

@@ -117,7 +117,7 @@ $drgScript   = Invoke-FeatureCompilerRun -FeatureIndexJson $scriptIndex `
 $drgScriptObj = $drgScript | ConvertFrom-Json
 Assert-Equal "DRG schema_version is 1" "1" "$($drgScriptObj.schema_version)"
 
-$scriptFeatEntry = $drgScriptObj.features.PSObject.Properties["core/scriptfeat"]?.Value
+$scriptFeatEntry = (_Prop $drgScriptObj.features "core/scriptfeat")
 Assert-NotNull "core/scriptfeat present in DRG" $scriptFeatEntry
 $resCount = if ($scriptFeatEntry.resources) { $scriptFeatEntry.resources.Count } else { 0 }
 Assert-Equal "script feature has 0 resources" "0" "$resCount"
@@ -135,7 +135,7 @@ $drgDecl   = Invoke-FeatureCompilerRun -FeatureIndexJson $declIndex `
                 -SortedFeatures @("core/declfeat") 2>$null
 
 $drgDeclObj  = $drgDecl | ConvertFrom-Json
-$declFeat    = $drgDeclObj.features.PSObject.Properties["core/declfeat"]?.Value
+$declFeat    = (_Prop $drgDeclObj.features "core/declfeat")
 Assert-NotNull "core/declfeat in DRG" $declFeat
 $resCountDecl = $declFeat.resources.Count
 Assert-Equal "declarative feature has 1 resource" "1" "$resCountDecl"
@@ -214,7 +214,7 @@ $drgFs   = Invoke-FeatureCompilerRun `
     -SortedFeatures @("core/fsfeature") 2>$null
 
 $drgFsObj  = $drgFs | ConvertFrom-Json
-$fsFeatOut = $drgFsObj.features.PSObject.Properties["core/fsfeature"]?.Value
+$fsFeatOut = (_Prop $drgFsObj.features "core/fsfeature")
 Assert-NotNull "core/fsfeature in DRG" $fsFeatOut
 
 $fsId      = $fsFeatOut.resources[0].id

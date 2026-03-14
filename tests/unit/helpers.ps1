@@ -15,6 +15,11 @@
 
 Set-StrictMode -Version Latest
 
+# ── PS 5.1 compatibility helpers ─────────────────────────────────────────────
+# Mirrors the definitions in core/lib/env.ps1 for standalone test execution.
+function _Prop { param($Obj, $Key) $p = $Obj.PSObject.Properties[$Key]; if ($null -ne $p) { $p.Value } else { $null } }
+function _Coal { param($a, $b) if ($null -ne $a) { $a } else { $b } }
+
 # ── Logger stubs (no colour; write to stderr) ─────────────────────────────────
 
 function Log-Error   { param([string]$Msg) [Console]::Error.WriteLine("[ERROR] $Msg") }

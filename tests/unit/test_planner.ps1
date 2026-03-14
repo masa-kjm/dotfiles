@@ -46,8 +46,8 @@ function State-ListFeatures {
 function State-QueryResources {
     param([string]$Feature)
     $s = $script:TestStateJson | ConvertFrom-Json
-    $feat = $s.features.PSObject.Properties[$Feature]?.Value
-    if ($feat -and $feat.PSObject.Properties['resources']?.Value) {
+    $feat = (_Prop $s.features $Feature)
+    if ($feat -and (_Prop $feat 'resources')) {
         return @($feat.resources)
     }
     return @()
@@ -86,7 +86,7 @@ function Assert-Blocked {
 function Assert-Summary {
     param([string]$TestName, [string]$Field, [int]$Expected, [string]$PlanJson)
     $plan   = $PlanJson | ConvertFrom-Json
-    $actual = if ($plan.summary.PSObject.Properties[$Field]?.Value -ne $null) {
+    $actual = if ((_Prop $plan.summary $Field) -ne $null) {
         [int]$plan.summary.PSObject.Properties[$Field].Value
     } else { 0 }
     Assert-Equal $TestName "$Expected" "$actual"
