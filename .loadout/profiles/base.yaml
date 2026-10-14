@@ -1,3 +1,41 @@
 schema_version: 3
 id: base
-resources: {}
+resources:
+  bashrc:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/bash/files/.bashrc
+      target: ~/.bashrc
+      operation: link
+  bashrcd:
+    type: file
+    properties:
+      kind: directory
+      source:
+        store: dotfiles
+        path: features/bash/files/.bashrc.d
+      target: ~/.bashrc.d
+      operation: link
+
+  nvim:
+    type: file
+    properties:
+      kind: directory
+      source:
+        store: dotfiles
+        path: features/neovim/files/nvim
+      target: ~/.config/nvim
+      operation: link
+
+  tmux:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/tmux/files/.tmux.conf
+      target: ~/.tmux.conf
+      operation: link
