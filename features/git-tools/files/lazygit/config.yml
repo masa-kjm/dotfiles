@@ -1,19 +1,26 @@
 # keybinding:
+
 #   commits:
+
 #     moveDownCommit: j
+
 #     moveUpCommit: k
+
 #   universal:
+
 #     nextBlock: <c-j>
+
 #     prevBlock: <c-k>
+
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --line-numbers
-  allBranchesLogCmd: git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never --line-numbers
   branchLogCmd: git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' {{branchName}} --
+  allBranchesLogCmds:
+    - git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#a0a0a0 reverse)%h%Creset %C(cyan)%ad%Creset %C(#dd4814)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --
 gui:
   language: "en"
   nerdFontsVersion: "3"
 os:
   editPreset: "nvim-remote"
-

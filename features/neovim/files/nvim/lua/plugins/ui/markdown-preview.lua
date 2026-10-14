@@ -6,7 +6,10 @@ local get_browser_path = require('utils').get_browser_path
 local plug = {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  build = "cd app && npm install",
+  build = function()
+    -- Use the plugin's built-in install function
+    vim.fn["mkdp#util#install"]()
+  end,
   init = function()
     vim.g.mkdp_filetypes = { "markdown" }
   end,
