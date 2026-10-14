@@ -1,0 +1,12 @@
+schema_version: 2
+default_profile: base
+
+profile_discovery:
+  paths:
+    - ./profiles
+
+stores:
+  dotfiles:
+    type: local
+    properties:
+      path: ..
