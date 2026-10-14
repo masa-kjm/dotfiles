@@ -1,15 +1,9 @@
 # keybinding:
-
 #   commits:
-
 #     moveDownCommit: j
-
 #     moveUpCommit: k
-
 #   universal:
-
 #     nextBlock: <c-j>
-
 #     prevBlock: <c-k>
 
 git:

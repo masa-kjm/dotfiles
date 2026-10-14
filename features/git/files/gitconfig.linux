@@ -44,3 +44,6 @@
 [include]
 	path = ~/.gitconfig.local
 
+# platform
+[core]
+	autocrlf = input

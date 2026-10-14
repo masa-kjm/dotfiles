@@ -1,0 +1,49 @@
+# Do not update after deployment!
+# If you need to update,update in the dotfiles and redeploy with the install script.
+
+[core]
+	editor = nvim
+	pager = delta
+	quotepath = false
+
+[fetch]
+	prune = true
+
+[diff]
+	compactionHeuristic = true
+
+[alias]
+	a = add
+	b = branch
+	cm = commit
+	cf = config
+	cfl = config -l
+	co = checkout
+	cp = cherry-pick
+	df = diff
+	l = log
+	ls = ls-files
+	m = merge
+	ms = merge --squash
+	ps = push
+	pl = pull
+	rb = rebase
+	sh = stash
+	st = status
+	sw = switch
+
+	root = rev-parse --show-toplevel
+	graph = log --graph --all --pretty=format:'%C(red)%h %C(green)(%cd)%C(yellow)%d %C(reset)%s %C(bold blue)<%an>%C(reset)' --abbrev-commit --date=format:'%Y-%m-%d %H:%M:%S'
+
+[delta]
+	line-numbers = true
+	diff-so-fancy=true
+	keep-plus-minus-markers=true
+	hyperlinks = true
+
+[include]
+	path = ~/.gitconfig.local
+
+# platform
+[core]
+	autocrlf = true

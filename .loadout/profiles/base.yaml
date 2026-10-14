@@ -1,5 +1,6 @@
 schema_version: 3
 id: base
+
 resources:
   bashrc:
     type: file
@@ -38,4 +39,34 @@ resources:
         store: dotfiles
         path: features/tmux/files/.tmux.conf
       target: ~/.tmux.conf
+      operation: link
+
+  git-config:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/git/files/gitconfig.linux
+      target: ~/.gitconfig
+      operation: link
+  
+  gitignore:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/git/files/ignore
+      target: ~/.config/git/ignore
+      operation: link
+
+  lazygit:
+    type: file
+    properties:
+      kind: directory
+      source:
+        store: dotfiles
+        path: features/git-tools/files/lazygit
+      target: ~/.config/lazygit
       operation: link
