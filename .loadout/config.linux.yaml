@@ -1,5 +1,5 @@
 schema_version: 2
-default_profile: base
+default_profile: linux
 
 profile_discovery:
   paths:

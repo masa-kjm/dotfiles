@@ -1,0 +1,32 @@
+schema_version: 3
+id: shell
+
+resources:
+  bashrc:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/bash/files/.bashrc
+      target: ~/.bashrc
+      operation: link
+  bashrcd:
+    type: file
+    properties:
+      kind: directory
+      source:
+        store: dotfiles
+        path: features/bash/files/.bashrc.d
+      target: ~/.bashrc.d
+      operation: link
+
+  tmux:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/tmux/files/.tmux.conf
+      target: ~/.tmux.conf
+      operation: link
