@@ -1,20 +1,8 @@
 {
   "plugins": {
-    "CopilotChat.nvim": {
-      "rev": "2b7da97d655416462d4d5c38d0eb1f1eacc900a2",
-      "src": "https://github.com/CopilotC-Nvim/CopilotChat.nvim"
-    },
-    "LuaSnip": {
-      "rev": "0abc8f390b278c3b4aabc4c004ac8a088b65cf24",
-      "src": "https://github.com/L3MON4D3/LuaSnip"
-    },
     "aerial.nvim": {
       "rev": "28fe6e822ae344544c379d60fcb13c9519a1f08a",
       "src": "https://github.com/stevearc/aerial.nvim"
-    },
-    "ale": {
-      "rev": "422c0e8ef42e2315a5b58dc281fccc59b816c37a",
-      "src": "https://github.com/dense-analysis/ale"
     },
     "auto-session": {
       "rev": "02a5588f677970a9bc784115c62bef9e5855499b",
@@ -24,33 +12,9 @@
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
       "src": "https://github.com/akinsho/bufferline.nvim"
     },
-    "cmp-buffer": {
-      "rev": "b74fab3656eea9de20a9b8116afa3cfc4ec09657",
-      "src": "https://github.com/hrsh7th/cmp-buffer"
-    },
-    "cmp-cmdline": {
-      "rev": "d126061b624e0af6c3a556428712dd4d4194ec6d",
-      "src": "https://github.com/hrsh7th/cmp-cmdline"
-    },
-    "cmp-nvim-lsp": {
-      "rev": "cd4ee08a988deb47ac3726f418fb27fe1a95729d",
-      "src": "https://github.com/hrsh7th/cmp-nvim-lsp"
-    },
-    "cmp-path": {
-      "rev": "c642487086dbd9a93160e1679a1327be111cbc25",
-      "src": "https://github.com/hrsh7th/cmp-path"
-    },
-    "cmp_luasnip": {
-      "rev": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90",
-      "src": "https://github.com/saadparwaiz1/cmp_luasnip"
-    },
     "colorful-winsep.nvim": {
       "rev": "7a8664fb8e91bd3435b3128c18dc814b3ddb11f5",
       "src": "https://github.com/nvim-zh/colorful-winsep.nvim"
-    },
-    "copilot.lua": {
-      "rev": "1d674b416df08e5c54e442503b7703a0df462acf",
-      "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "dial.nvim": {
       "rev": "f2634758455cfa52a8acea6f142dcd6271a1bf57",
@@ -80,18 +44,6 @@
       "rev": "f1e186e44d3b7f9ae918008e2c28ce37c6023d2d",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
-    "lsp_signature.nvim": {
-      "rev": "1997451c4c9956a1380d8bea4b0e33ebdf07976e",
-      "src": "https://github.com/ray-x/lsp_signature.nvim"
-    },
-    "lspkind.nvim": {
-      "rev": "c7274c48137396526b59d86232eabcdc7fed8a32",
-      "src": "https://github.com/onsails/lspkind.nvim"
-    },
-    "lspsaga.nvim": {
-      "rev": "cf6fc9473bba1d332eda9887855ea29ed9b37701",
-      "src": "https://github.com/nvimdev/lspsaga.nvim"
-    },
     "lualine.nvim": {
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
@@ -111,10 +63,6 @@
     "nvim-bqf": {
       "rev": "c282a62bec6c0621a1ef5132aa3f4c9fc4dcc2c7",
       "src": "https://github.com/kevinhwang91/nvim-bqf"
-    },
-    "nvim-cmp": {
-      "rev": "fe29aba4117227a6df637bc41e4b4fb4e98864a0",
-      "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
       "rev": "443d92c6bea761ab54cdde46fb197a2b4d614bdd",

@@ -41,10 +41,6 @@ vim.pack.add({
   gh('nvim-lua/plenary.nvim'),
   gh('nvim-tree/nvim-web-devicons'),
 
-  -- ai
-  gh('zbirenbaum/copilot.lua'),
-  gh('CopilotC-Nvim/CopilotChat.nvim'),
-
   -- base
   gh('stevearc/aerial.nvim'),
   gh('akinsho/toggleterm.nvim'),
@@ -74,19 +70,8 @@ vim.pack.add({
   gh('sindrets/diffview.nvim'),
   gh('lewis6991/gitsigns.nvim'),
 
-  -- lsp
+  -- lsp (server definitions only; see config/lsp.lua)
   gh('neovim/nvim-lspconfig'),
-  gh('hrsh7th/nvim-cmp'),
-  gh('hrsh7th/cmp-nvim-lsp'),
-  gh('hrsh7th/cmp-buffer'),
-  gh('hrsh7th/cmp-path'),
-  gh('hrsh7th/cmp-cmdline'),
-  gh('L3MON4D3/LuaSnip'),
-  gh('saadparwaiz1/cmp_luasnip'),
-  gh('onsails/lspkind.nvim'),
-  gh('ray-x/lsp_signature.nvim'),
-  gh('nvimdev/lspsaga.nvim'),
-  gh('dense-analysis/ale'),
 
   -- ui
   gh('folke/tokyonight.nvim'),
@@ -100,10 +85,6 @@ vim.pack.add({
 -- Configuration modules, loaded in order (the colorscheme goes first).
 local modules = {
   'ui.tokyonight',
-
-  -- ai
-  'ai.copilot',
-  'ai.copilot-chat',
 
   -- base
   'base.aerial',
@@ -130,13 +111,6 @@ local modules = {
   -- git
   'git.diffview',
   'git.gitsigns',
-
-  -- lsp
-  'lsp.lspconfig',
-  'lsp.nvim-cmp',
-  'lsp.lsp-signature',
-  'lsp.lsp-saga',
-  'lsp.ale',
 
   -- ui
   'ui.indent-blankline',

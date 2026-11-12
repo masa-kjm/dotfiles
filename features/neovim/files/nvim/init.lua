@@ -25,3 +25,5 @@ if is_vscode() then
 end
 
 require('plugins')
+require('config.diagnostic')
+require('config.lsp')
