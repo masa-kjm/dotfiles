@@ -6,7 +6,8 @@ local servers = {
   'rust_analyzer',
   'ts_ls',
   'eslint',
-  'pylsp',
+  'ruff',
+  'basedpyright',
   'copilot',
 }
 

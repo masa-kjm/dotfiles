@@ -17,7 +17,7 @@ Neovim 0.12 以降向けの設定。プラグイン管理は組み込みの `vim
 | rust-analyzer | Rust | `rust` feature |
 | typescript-language-server / vscode-langservers-extracted（eslint） | TS / JS | `npm` feature |
 | @github/copilot-language-server | Copilot（inline completion） | `npm` feature |
-| python-lsp-server | Python | `uv` feature |
+| ruff / basedpyright | Python（lint・format / 型チェック・補完） | `uv` feature |
 
 ## 新しい環境での初回手順
 

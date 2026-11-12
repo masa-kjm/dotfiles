@@ -2,4 +2,6 @@ description: uv Python packages for development
 depends:
   - python
 packages:
-  - name: python-lsp-server
+  # Required by Neovim (nvim/after/lsp/ruff.lua, basedpyright.lua)
+  - name: ruff
+  - name: basedpyright
