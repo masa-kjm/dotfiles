@@ -12,9 +12,7 @@ local build_hooks = {
     vim.fn['mkdp#util#install']()
   end,
   ['nvim-treesitter'] = function()
-    if vim.fn.exists(':TSUpdate') == 2 then
-      vim.cmd('TSUpdate')
-    end
+    require('nvim-treesitter').update()
   end,
 }
 
@@ -44,9 +42,7 @@ vim.pack.add({
   -- base
   gh('stevearc/aerial.nvim'),
   gh('akinsho/toggleterm.nvim'),
-  -- Pinned to the archived `master` branch until the `main` migration
-  { src = gh('nvim-treesitter/nvim-treesitter'), version = 'master' },
-  { src = gh('nvim-treesitter/nvim-treesitter-textobjects'), version = 'master' },
+  { src = gh('nvim-treesitter/nvim-treesitter'), version = 'main' },
   gh('j-hui/fidget.nvim'),
   gh('rmagatti/auto-session'),
   gh('akinsho/bufferline.nvim'),
