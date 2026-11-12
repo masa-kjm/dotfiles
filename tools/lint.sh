@@ -86,7 +86,7 @@ validate_neovim() {
     cd "$NVIM_DIR"
     
     echo "  Running stylua..."
-    if ! stylua -c ./lua; then
+    if ! stylua --search-parent-directories -c ./lua; then
         return 1
     fi
     

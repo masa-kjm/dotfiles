@@ -20,7 +20,7 @@ function M.get_browser_path()
   elseif M.is_wsl() then
     return vim.fn.expand('~/scoop/apps/googlechrome/current/chrome.exe')
   else
-    return "firefox"
+    return 'firefox'
   end
 end
 
