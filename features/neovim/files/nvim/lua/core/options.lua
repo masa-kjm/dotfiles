@@ -16,6 +16,13 @@ vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.pumblend = 10
 vim.opt.winblend = 20
+vim.opt.winborder = 'rounded'
+
+-- files changed outside of Neovim (e.g. by an agent) are reloaded when the buffer is unmodified
+vim.opt.autoread = true
+
+-- diff
+vim.opt.diffopt:append({ 'algorithm:histogram', 'indent-heuristic' })
 
 -- wrap lines
 vim.opt.wrap = true

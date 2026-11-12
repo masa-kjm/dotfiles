@@ -25,7 +25,15 @@ require('lualine').setup({
       -- 	symbols = { error = ' ', warn = ' ', info = ' ' },
       -- }
     },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_x = {
+      -- LSP progress (replaces fidget.nvim)
+      function()
+        return vim.lsp.status()
+      end,
+      'encoding',
+      'fileformat',
+      'filetype',
+    },
     lualine_y = { 'progress' },
     lualine_z = { 'location' },
   },

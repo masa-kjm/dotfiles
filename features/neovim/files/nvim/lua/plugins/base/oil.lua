@@ -14,7 +14,7 @@ require('oil').setup({
     ['<C-r>'] = 'actions.refresh',
     ['<Leader>fn'] = {
       function()
-        require('telescope.builtin').find_files({
+        require('fzf-lua').files({
           cwd = require('oil').get_current_dir(),
         })
       end,
@@ -24,7 +24,7 @@ require('oil').setup({
     },
     ['<Leader>fa'] = {
       function()
-        require('telescope.builtin').live_grep({
+        require('fzf-lua').live_grep({
           cwd = require('oil').get_current_dir(),
         })
       end,

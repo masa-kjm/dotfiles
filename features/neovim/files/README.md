@@ -48,7 +48,7 @@ VSCode-Neovim から読み込まれた場合（`vim.g.vscode`）は、`core` と
 | キーマップの確認 | `:map` / `:verbose map {lhs}`（定義元ファイルも分かる） |
 | LSP の状態 | `:checkhealth vim.lsp` |
 | LSP ログ | `:lua vim.cmd.tabnew(vim.lsp.log.get_filename())` |
-| 各プラグインのヘルプ | `:help {plugin-name}`（`:help telescope` など。`doc/` を持つプラグインのみ） |
+| 各プラグインのヘルプ | `:help {plugin-name}`（`:help fzf-lua` など。`doc/` を持つプラグインのみ） |
 
 LSP の標準キー: `grn`（rename）、`gra`（code action）、`grr`（references）、`gri`（implementation）、`grt`（type definition）、`gO`（symbols）、`]d` / `[d`（診断移動）、挿入モードの `<C-S>`（signature help）。
 Visual モードの `an` / `in` は treesitter による選択範囲の拡大 / 縮小。
@@ -122,6 +122,15 @@ Leader は `<Space>`。
 
 - register の貼り付け: `<C-r>"`
 - クリップボードの貼り付け: `<C-r>+`
+
+### 検索（fzf-lua）
+
+`<Leader>f` 始まり: `fn`（files）、`fa`（live grep）、`fb`（buffers）、`fh`（help）、`ff`（バッファ内検索）、`fd`（診断）、`fs`（document symbols）、`fr`（resume）、`fgc` / `fgs`（git commits / status）、`fw`（session）。
+`vim.ui.select` も fzf-lua で表示される。
+
+### その他
+
+- undo tree（標準の `nvim.undotree`）: `<Leader>u`
 
 ### filer（oil）
 

@@ -43,13 +43,11 @@ vim.pack.add({
   gh('stevearc/aerial.nvim'),
   gh('akinsho/toggleterm.nvim'),
   { src = gh('nvim-treesitter/nvim-treesitter'), version = 'main' },
-  gh('j-hui/fidget.nvim'),
   gh('rmagatti/auto-session'),
   gh('akinsho/bufferline.nvim'),
-  { src = gh('nvim-telescope/telescope.nvim'), version = '0.1.x' },
+  gh('ibhagwan/fzf-lua'),
   gh('stevearc/oil.nvim'),
   gh('stevearc/overseer.nvim'),
-  gh('rcarriga/nvim-notify'),
   gh('kevinhwang91/nvim-bqf'),
 
   -- edit
@@ -74,7 +72,6 @@ vim.pack.add({
   gh('lukas-reineke/indent-blankline.nvim'),
   gh('nvim-lualine/lualine.nvim'),
   gh('iamcco/markdown-preview.nvim'),
-  gh('stevearc/dressing.nvim'),
   gh('nvim-zh/colorful-winsep.nvim'),
 }, { load = true })
 
@@ -86,13 +83,11 @@ local modules = {
   'base.aerial',
   'base.toggleterm',
   'base.treesitter',
-  'base.fidget',
   'base.autosession',
   'base.bufferline',
-  'base.telescope',
+  'base.fzf-lua',
   'base.oil',
   'base.overseer',
-  'base.nvim-notify',
 
   -- edit
   'edit.autopairs',
@@ -112,7 +107,6 @@ local modules = {
   'ui.indent-blankline',
   'ui.lualine',
   'ui.markdown-preview',
-  'ui.dressing',
   'ui.winsep',
 }
 
