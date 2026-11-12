@@ -18,8 +18,10 @@ if is_windows() then
   end
 end
 
+-- VSCode shares this config: load only the keymaps, never plugins or LSP.
 if is_vscode() then
   require('core/vscode-keymaps')
+  return
 end
 
-require('plugins/lazy')
+require('plugins')
