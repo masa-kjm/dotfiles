@@ -1,8 +1,6 @@
 -- LSP setup on top of the built-in client. Per-server settings live in nvim/after/lsp/<server>.lua.
 -- nvim-lspconfig only supplies default server definitions.
 
-local keymap = require('utils').keymap
-
 local servers = {
   'lua_ls',
   'rust_analyzer',
@@ -21,7 +19,8 @@ vim.lsp.enable(servers)
 -- Keymaps that the Nvim defaults (grn, gra, grr, gri, grt, gO, ]d, [d, <C-S>) do not cover.
 local function set_buffer_keymaps(bufnr)
   local function map(lhs, rhs, desc)
-    keymap('n', lhs, rhs, { buffer = bufnr, desc = desc })
+    -- Not utils.keymap: this runs once per attached client and would warn about duplicates
+    vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
   end
   map('gd', vim.lsp.buf.definition, 'LSP: definition')
   map('gD', vim.lsp.buf.declaration, 'LSP: declaration')
@@ -46,6 +45,17 @@ local function enable_inline_completion(bufnr)
   end, { buffer = bufnr, desc = 'Previous inline completion' })
 end
 
+-- Servers only advertise symbols such as '.' as trigger characters, so autotrigger would not fire
+-- while typing identifiers. Add every identifier character to complete as you type.
+local function extend_trigger_characters(client)
+  local provider = client.server_capabilities.completionProvider
+  if not provider then
+    return
+  end
+  local chars = vim.split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_', '')
+  provider.triggerCharacters = vim.list_extend(provider.triggerCharacters or {}, chars)
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspAttach', { clear = true }),
   callback = function(args)
@@ -59,6 +69,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local methods = vim.lsp.protocol.Methods
     if client:supports_method(methods.textDocument_completion, bufnr) then
+      extend_trigger_characters(client)
       vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
     end
     if client:supports_method(methods.textDocument_inlineCompletion, bufnr) then

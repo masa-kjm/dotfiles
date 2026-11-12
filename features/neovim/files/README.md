@@ -81,7 +81,7 @@ nvim/
 ├── after/lsp/<server>.lua  # LSP サーバー別の設定
 ├── lua/
 │   ├── core/               # 共通設定（options / keymaps / autocmds / vscode-keymaps）
-│   ├── config/             # 標準機能の設定（lsp.lua: 有効化・補完・キー、diagnostic.lua）
+│   ├── config/             # 標準機能・連携の設定（lsp.lua、diagnostic.lua、agent.lua）
 │   ├── plugins/            # プラグイン宣言（init.lua）と設定（base / edit / git / ui）
 │   ├── overseer/template/  # overseer のタスクテンプレート
 │   └── utils/              # 共通ユーティリティ（keymap ヘルパーなど）
@@ -92,14 +92,15 @@ nvim/
 1. `core`（options / keymaps / autocmds）
 2. `vim.g.vscode` なら `core/vscode-keymaps` だけ読んで終了
 3. `plugins`（`vim.pack.add` → 各設定モジュール）
-4. `config.diagnostic` / `config.lsp`
+4. `config.diagnostic` / `config.lsp` / `config.agent` / `config.cmdline`
 
 ### LSP
 
 - サーバーの定義は nvim-lspconfig が供給し、差分だけを `after/lsp/<server>.lua` に書く（`lsp/` ではなく `after/` なのは、プラグイン側の定義より優先させるため）。
 - 有効化するサーバーは `lua/config/lsp.lua` の `servers` で管理する。
 - サーバーを追加するには、(1) feature でバイナリを導入、(2) `after/lsp/<server>.lua` を作成、(3) `servers` に追記、の順に行う。
-- 補完は `vim.lsp.completion`（自動表示、Tab では選択しない）。選択は `<C-n>` / `<C-p>`、確定は `<C-y>`、中止は `<C-e>`。
+- 補完は `vim.lsp.completion`（自動表示。選択は `<C-n>` / `<C-p>`、確定は `<C-y>`、中止は `<C-e>`。
+- コマンドライン（`:` `/` `?`）は入力中に候補を自動表示（`lua/config/cmdline.lua`）。選択は `<Tab>` / 矢印キー。
 - Copilot は `vim.lsp.inline_completion`。`<C-y>` で受け入れ、`<M-]>` / `<M-[>` で次 / 前の候補。
 
 ### フォーマット / lint
@@ -116,7 +117,6 @@ Leader は `<Space>`。
 
 ### Normal mode
 
-現在のファイルを最後のコミットと diff する: `<Leader>hh`
 
 ### Insert mode
 
@@ -127,6 +127,25 @@ Leader は `<Space>`。
 
 `<Leader>f` 始まり: `fn`（files）、`fa`（live grep）、`fb`（buffers）、`fh`（help）、`ff`（バッファ内検索）、`fd`（診断）、`fs`（document symbols）、`fr`（resume）、`fgc` / `fgs`（git commits / status）、`fw`（session）。
 `vim.ui.select` も fzf-lua で表示される。
+
+### git（`<Leader>g*`）
+
+| キー | 内容 |
+|---|---|
+| `<Leader>gd` | HEAD との差分（diffview） |
+| `<Leader>gf` | 現在ファイルの履歴（diffview） |
+| `<Leader>gc` | diffview を閉じる |
+| `<Leader>gD` | `:Diffview` |
+| `<Leader>gp` / `<Leader>gr` | hunk のプレビュー / リセット（gitsigns） |
+| `<Leader>gq` | 変更ファイルを quickfix へ（`:ChangedFiles [ref]`。untracked も含む） |
+| `]c` / `[c` | 次 / 前の hunk |
+
+### Agent 連携（`lua/config/agent.lua`）
+
+- 外部で変更されたファイルは `autoread` + `checktime`（FocusGained / BufEnter / CursorHold / TermLeave）で自動再読み込みし、通知する。
+- `<Leader>ic`: Copilot CLI（`copilot`）を常駐ターミナルで開閉。`vim.g.agent_cli_cmd` で別コマンドに変更できる。
+- `<Leader>ip`: 現在ファイルのパス（`@path`）を CLI に送信。
+- Visual `<Leader>is`: 選択範囲（`@path:開始-終了` + 本文）を CLI に送信。
 
 ### その他
 

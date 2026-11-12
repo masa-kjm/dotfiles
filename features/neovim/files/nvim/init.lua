@@ -27,3 +27,5 @@ end
 require('plugins')
 require('config.diagnostic')
 require('config.lsp')
+require('config.agent')
+require('config.cmdline')

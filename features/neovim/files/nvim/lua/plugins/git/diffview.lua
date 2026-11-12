@@ -22,7 +22,7 @@ require('diffview').setup({
     },
   },
 })
-keymap('n', '<Leader>hh', '<cmd>DiffviewOpen HEAD<CR>', { desc = '' })
-keymap('n', '<Leader>hf', '<cmd>DiffviewFileHistory %<CR>', { desc = '' })
-keymap('n', '<Leader>hc', '<cmd>DiffviewClose<CR>', { desc = '' })
-keymap('n', '<Leader>hd', '<cmd>Diffview<CR>', { desc = '' })
+keymap('n', '<Leader>gd', '<cmd>DiffviewOpen HEAD<CR>', { desc = '' })
+keymap('n', '<Leader>gf', '<cmd>DiffviewFileHistory %<CR>', { desc = '' })
+keymap('n', '<Leader>gc', '<cmd>DiffviewClose<CR>', { desc = '' })
+keymap('n', '<Leader>gD', '<cmd>Diffview<CR>', { desc = '' })
