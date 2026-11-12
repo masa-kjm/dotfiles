@@ -106,7 +106,7 @@ nvim/
 ### フォーマット / lint
 
 ```bash
-bash tools/lint.sh   # stylua（format チェック）と luacheck
+bash features/neovim/lint.sh   # stylua / luacheck / headless smoke test（`bash tools/lint.sh` からも実行される）
 ```
 
 コメントは英語で書く。設定は `.stylua.toml` と `.luacheckrc` に従う。

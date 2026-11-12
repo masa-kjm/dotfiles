@@ -72,37 +72,20 @@ validate_profiles() {
     fi
 }
 
-# Validate Neovim config
-validate_neovim() {
-    log_step "Validating Neovim configuration..."
-    
-    local NVIM_DIR="$DOTFILES_ROOT/features/neovim/files/nvim"
-    
-    if [[ ! -d "$NVIM_DIR" ]]; then
-        echo "  Skipping (directory not found)"
-        return 0
-    fi
-    
-    cd "$NVIM_DIR"
-    
-    echo "  Running stylua..."
-    if ! stylua --search-parent-directories -c ./lua; then
-        return 1
-    fi
-    
-    echo "  Running luacheck..."
-    if ! luacheck .; then
-        return 1
-    fi
-    
-    echo "  ✓ Neovim config valid"
+# Run feature-specific checks (features/<name>/lint.sh)
+validate_features() {
+    local script
+    for script in "$DOTFILES_ROOT"/features/*/lint.sh; do
+        [[ -f "$script" ]] || continue
+        log_step "Running $(basename "$(dirname "$script")") feature checks..."
+        bash "$script" || return 1
+    done
 }
 
 # Main
 log_step "Running quality checks..."
 
 validate_profiles || exit 1
-validate_neovim || exit 1
+validate_features || exit 1
 
 log_step "All checks passed!"
-
