@@ -92,7 +92,7 @@ nvim/
 1. `core`（options / keymaps / autocmds）
 2. `vim.g.vscode` なら `core/vscode-keymaps` だけ読んで終了
 3. `plugins`（`vim.pack.add` → 各設定モジュール）
-4. `config.diagnostic` / `config.lsp` / `config.agent` / `config.cmdline`
+4. `config.diagnostic` / `config.lsp` / `config.agent` / `config.ui` / `config.cmdline`
 
 ### LSP
 
@@ -100,6 +100,7 @@ nvim/
 - 有効化するサーバーは `lua/config/lsp.lua` の `servers` で管理する。
 - サーバーを追加するには、(1) feature でバイナリを導入、(2) `after/lsp/<server>.lua` を作成、(3) `servers` に追記、の順に行う。
 - 補完は `vim.lsp.completion`（自動表示。選択は `<C-n>` / `<C-p>`、確定は `<C-y>`、中止は `<C-e>`。
+- メッセージ / cmdline UI は実験的機能の `ui2`（`lua/config/ui.lua`）。`vim.notify` などは右上の浮動ウィンドウに表示され、hit-enter プロンプトは出ない。長いメッセージは `g<` で pager に表示する。仕様変更や不具合があれば `config/ui.lua` の読み込みを外せば標準 UI に戻る。
 - コマンドライン（`:` `/` `?`）は入力中に候補を自動表示（`lua/config/cmdline.lua`）。選択は `<Tab>` / 矢印キー。
 - Copilot は `vim.lsp.inline_completion`。`<C-y>` で受け入れ、`<M-]>` / `<M-[>` で次 / 前の候補。
 
