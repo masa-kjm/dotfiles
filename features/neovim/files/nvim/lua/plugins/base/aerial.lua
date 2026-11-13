@@ -9,6 +9,7 @@ require('aerial').setup({
     ['l'] = 'actions.jump',
   },
 })
-keymap('n', 'gO', '<cmd>AerialToggle!<CR>', { desc = 'Aerial toggle' })
-keymap('n', ']o', '<cmd>AerialNext<CR>', { desc = '' })
-keymap('n', '[o', '<cmd>AerialPrev<CR>', { desc = '' })
+-- gO stays the built-in document symbols; the outline lives under <Leader>o
+keymap('n', '<Leader>o', '<cmd>AerialToggle!<CR>', { desc = 'Toggle outline' })
+keymap('n', ']o', '<cmd>AerialNext<CR>', { desc = 'Next outline symbol' })
+keymap('n', '[o', '<cmd>AerialPrev<CR>', { desc = 'Previous outline symbol' })

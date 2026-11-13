@@ -7,5 +7,5 @@ require('auto-session').setup({
     picker = 'fzf',
   },
 })
-keymap('n', '<leader>fw', '<cmd>SessionSearch<CR>', { desc = 'Session search' })
-keymap('n', '<leader>ws', '<cmd>SessionSave<CR>', { desc = 'Save session' })
+keymap('n', '<Leader>sl', '<cmd>SessionSearch<CR>', { desc = 'List sessions' })
+keymap('n', '<Leader>ss', '<cmd>SessionSave<CR>', { desc = 'Save session' })

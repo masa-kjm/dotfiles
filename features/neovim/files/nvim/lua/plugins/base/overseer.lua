@@ -54,6 +54,6 @@ vim.api.nvim_create_user_command('OverseerRestartLast', function()
   end
 end, {})
 
-keymap('n', '<Leader>to', '<cmd>OverseerToggle<CR>', { desc = '' })
-keymap('n', '<Leader>tr', '<cmd>OverseerRun<CR>', { desc = '' })
-keymap('n', '<Leader>tl', '<cmd>OverseerRestartLast<CR>', { desc = '' })
+keymap('n', '<Leader>to', '<cmd>OverseerToggle<CR>', { desc = 'Toggle task list' })
+keymap('n', '<Leader>tr', '<cmd>OverseerRun<CR>', { desc = 'Run task' })
+keymap('n', '<Leader>tl', '<cmd>OverseerRestartLast<CR>', { desc = 'Restart last task' })

@@ -17,9 +17,9 @@ dial.augends:register_group({
     augend.date.alias['%Y/%m/%d'], -- Dates in YYYY/MM/DD format
   },
 })
-keymap('n', '<C-a>', require('dial.map').inc_normal(), { desc = '' })
-keymap('n', '<C-x>', require('dial.map').dec_normal(), { desc = '' })
-keymap('v', '<C-a>', require('dial.map').inc_visual(), { desc = '' })
-keymap('v', '<C-x>', require('dial.map').dec_visual(), { desc = '' })
-keymap('v', 'g<C-a>', require('dial.map').inc_gvisual(), { desc = '' })
-keymap('v', 'g<C-x>', require('dial.map').dec_gvisual(), { desc = '' })
+keymap('n', '<C-a>', require('dial.map').inc_normal(), { desc = 'Increment' })
+keymap('n', '<C-x>', require('dial.map').dec_normal(), { desc = 'Decrement' })
+keymap('v', '<C-a>', require('dial.map').inc_visual(), { desc = 'Increment' })
+keymap('v', '<C-x>', require('dial.map').dec_visual(), { desc = 'Decrement' })
+keymap('v', 'g<C-a>', require('dial.map').inc_gvisual(), { desc = 'Increment sequentially' })
+keymap('v', 'g<C-x>', require('dial.map').dec_gvisual(), { desc = 'Decrement sequentially' })

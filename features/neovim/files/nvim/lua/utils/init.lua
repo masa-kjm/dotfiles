@@ -64,6 +64,10 @@ M.keymap = function(mode, lhs, rhs, opts)
   local defaults = { noremap = true, silent = true }
   opts = vim.tbl_deep_extend('force', defaults, opts)
 
+  if not opts.desc or opts.desc == '' then
+    vim.notify('Keymap without desc: ' .. modes[1] .. ':' .. lhs, vim.log.levels.WARN)
+  end
+
   -- Check duplicate
   for _, m in ipairs(modes) do
     local key = m .. ':' .. lhs

@@ -50,7 +50,7 @@ require('gitsigns').setup({
     col = 1,
   },
 })
-keymap('n', ']c', '<cmd>Gitsigns next_hunk<CR>zz', { desc = '' })
-keymap('n', '[c', '<cmd>Gitsigns prev_hunk<CR>zz', { desc = '' })
-keymap('n', '<Leader>gp', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = '' })
-keymap('n', '<Leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = '' })
+keymap('n', ']c', '<cmd>Gitsigns next_hunk<CR>zz', { desc = 'Next hunk' })
+keymap('n', '[c', '<cmd>Gitsigns prev_hunk<CR>zz', { desc = 'Previous hunk' })
+keymap('n', '<Leader>gp', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'Preview hunk' })
+keymap('n', '<Leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Reset hunk' })

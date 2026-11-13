@@ -1,27 +1,29 @@
-vim.keymap.set({ 'n', 'x' }, 'J', '5j')
-vim.keymap.set({ 'n', 'x' }, 'K', '5k')
-vim.keymap.set({ 'n', 'x' }, '<Leader>m', '%')
+-- Shared keymaps (also loaded in VSCode, so no plugin commands here).
+local map = vim.keymap.set
 
-vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<CR>')
-vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<CR>')
-vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +4<CR>')
-vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -4<CR>')
+map({ 'n', 'x' }, 'J', '5j', { desc = 'Move 5 lines down' })
+map({ 'n', 'x' }, 'K', '5k', { desc = 'Move 5 lines up' })
+map({ 'n', 'x' }, '<Leader>m', '%', { desc = 'Jump to matching pair' })
 
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
-vim.keymap.set('n', '*', '*zz')
-vim.keymap.set('n', '#', '#zz')
-vim.keymap.set('n', '<Leader>/', ':noh<CR>')
+map('n', '<C-Up>', '<cmd>resize +2<CR>', { desc = 'Increase window height' })
+map('n', '<C-Down>', '<cmd>resize -2<CR>', { desc = 'Decrease window height' })
+map('n', '<C-Right>', '<cmd>vertical resize +4<CR>', { desc = 'Increase window width' })
+map('n', '<C-Left>', '<cmd>vertical resize -4<CR>', { desc = 'Decrease window width' })
 
-vim.keymap.set('n', ']q', ':cnext<CR>')
-vim.keymap.set('n', '[q', ':cprev<CR>')
+map('n', 'n', 'nzz', { desc = 'Next match (centered)' })
+map('n', 'N', 'Nzz', { desc = 'Previous match (centered)' })
+map('n', '*', '*zz', { desc = 'Search word forward (centered)' })
+map('n', '#', '#zz', { desc = 'Search word backward (centered)' })
+map('n', '<Leader>/', ':noh<CR>', { desc = 'Clear search highlight' })
 
-vim.keymap.set('n', '<C-p>', ':bp<CR>')
-vim.keymap.set('n', '<C-n>', ':bn<CR>')
-vim.keymap.set('n', '<C-q>', '<cmd>bd<CR>')
+map('n', ']q', ':cnext<CR>', { desc = 'Next quickfix item' })
+map('n', '[q', ':cprev<CR>', { desc = 'Previous quickfix item' })
+
+-- <C-n> / <C-p> (buffer cycling) are defined by bufferline
+map('n', '<C-q>', '<cmd>bd<CR>', { desc = 'Delete buffer' })
 
 -- Built-in undo tree (bundled with Neovim, loaded on demand)
-vim.keymap.set('n', '<Leader>u', function()
+map('n', '<Leader>u', function()
   vim.cmd.packadd('nvim.undotree')
   require('undotree').open()
 end, { desc = 'Undo tree' })

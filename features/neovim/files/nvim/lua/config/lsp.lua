@@ -26,7 +26,7 @@ local function set_buffer_keymaps(bufnr)
   map('gd', vim.lsp.buf.definition, 'LSP: definition')
   map('gD', vim.lsp.buf.declaration, 'LSP: declaration')
   map('<Leader>k', vim.lsp.buf.hover, 'LSP: hover')
-  map('<Leader>ae', vim.diagnostic.open_float, 'Diagnostics: open float')
+  map('<Leader>d', vim.diagnostic.open_float, 'Diagnostics: open float')
 end
 
 local function enable_inline_completion(bufnr)

@@ -24,10 +24,10 @@ static_checks() {
     log_step "Validating Neovim configuration..."
 
     echo "  Running stylua..."
-    stylua --config-path "$FILES_DIR/.stylua.toml" -c "$NVIM_DIR/lua" "$NVIM_DIR/init.lua"
+    stylua --config-path "$FILES_DIR/.stylua.toml" -c "$NVIM_DIR/lua" "$NVIM_DIR/init.lua" "$FEATURE_DIR/checks"
 
     echo "  Running luacheck..."
-    luacheck --config "$FILES_DIR/.luacheckrc" "$NVIM_DIR"
+    luacheck --config "$FILES_DIR/.luacheckrc" "$NVIM_DIR" "$FEATURE_DIR/checks"
 
     echo "  ✓ Neovim config valid"
 }
@@ -53,7 +53,7 @@ smoke_test() {
     if [[ -d "$data_dir/site/pack/core/opt" ]]; then
         echo "  Checking startup errors..."
         if ! output="$(XDG_CONFIG_HOME="$tmp_config" nvim --headless +qa 2>&1)" \
-            || grep -qE '^(Error|E[0-9]+:)|Failed to load' <<< "$output"; then
+            || grep -qE '^(Error|E[0-9]+:)|Failed to load|Keymap without desc|Duplicate keymap' <<< "$output"; then
             log_error "Neovim reported errors on startup:"
             echo "$output"
             return 1
@@ -68,8 +68,15 @@ smoke_test() {
             grep -B1 -A3 'ERROR' "$health_file"
             return 1
         fi
+
+        echo "  Checking <Leader> keymaps (desc / prefix conflicts)..."
+        if ! output="$(XDG_CONFIG_HOME="$tmp_config" nvim --headless -c "luafile $FEATURE_DIR/checks/keymaps.lua" -c qa 2>&1)"; then
+            log_error "Keymap check failed:"
+            echo "$output"
+            return 1
+        fi
     else
-        echo "  Skipping startup and health checks (plugins are not installed: run nvim once)"
+        echo "  Skipping startup, health and keymap checks (plugins are not installed: run nvim once)"
     fi
 
     echo "  Checking that VSCode mode loads no plugins..."

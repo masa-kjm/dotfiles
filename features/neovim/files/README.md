@@ -107,39 +107,46 @@ nvim/
 ### フォーマット / lint
 
 ```bash
-bash features/neovim/lint.sh   # stylua / luacheck / headless smoke test（`bash tools/lint.sh` からも実行される）
+bash features/neovim/lint.sh   # stylua / luacheck / headless smoke test（起動・health・キーマップ・VSCode）。`bash tools/lint.sh` からも実行される
 ```
 
 コメントは英語で書く。設定は `.stylua.toml` と `.luacheckrc` に従う。
 
 ## キーマップメモ
 
-Leader は `<Space>`。
+Leader は `<Space>`。一覧は `<Leader>fk`（fzf-lua の keymaps ピッカー）でも検索できる。
 
-### Normal mode
+### `<Leader>` の体系
 
+| プレフィックス | 意味 | 主なキー |
+|---|---|---|
+| `f` | find（fzf-lua） | `fn` files、`fa` live grep、`fb` buffers、`fh` help、`ff` バッファ内検索、`fd` 診断、`fs` symbols、`fm` marks、`f:` コマンド履歴、`fq` quickfix 履歴、`fr` resume、`fk` keymaps |
+| `g` | git | `gd` HEAD との差分、`gf` ファイル履歴、`gc` diffview を閉じる、`gD` `:Diffview`、`gp` hunk preview、`gr` hunk reset、`gq` 変更ファイルを quickfix へ、`gl` log、`gs` status |
+| `e` | explorer（oil） | `e` カレントバッファのディレクトリ、`E` cwd |
+| `s` | session | `ss` 保存、`sl` 一覧 / 検索 |
+| `b` | buffer | `bp` pin、`bs` ディレクトリ順に並べ替え、`bco` / `bcr` / `bcl` 他 / 右 / 左を閉じる |
+| `t` | task（overseer） | `to` 一覧、`tr` 実行、`tl` 直前のタスクを再実行 |
+| `i` | agent | `ic` CLI の開閉、`ip` パス送信、`is`（Visual）選択範囲送信 |
+| `o` | outline（aerial） | `o` toggle（`]o` / `[o` で前後のシンボル） |
+| `d` | diagnostics | `d` 診断のフロート表示（LSP attach 時のみ） |
+| 単独 | その他 | `m` `%` へ移動、`M` split / join（treesj）、`u` undo tree、`/` 検索ハイライト解除、`k` hover（LSP attach 時のみ） |
+
+- `]c` / `[c`: 次 / 前の hunk、`]q` / `[q`: quickfix、`<C-n>` / `<C-p>`: 次 / 前のバッファ（bufferline）、`s` / `S`: flash。
+- `gO` は標準の document symbols（aerial の toggle は `<Leader>o`）。
+- 新しいキーを追加するときは、`utils.keymap` を使い `desc` を必ず付ける。`desc` の漏れと、あるキーが別のキーの前方一致になること（`timeoutlen` 待ちの原因）は `features/neovim/lint.sh` が検出する。
 
 ### Insert mode
 
 - register の貼り付け: `<C-r>"`
 - クリップボードの貼り付け: `<C-r>+`
 
-### 検索（fzf-lua）
+### filer（oil）の中
 
-`<Leader>f` 始まり: `fn`（files）、`fa`（live grep）、`fb`（buffers）、`fh`（help）、`ff`（バッファ内検索）、`fd`（診断）、`fs`（document symbols）、`fr`（resume）、`fgc` / `fgs`（git commits / status）、`fw`（session）。
-`vim.ui.select` も fzf-lua で表示される。
+カレントディレクトリへ移動: `_`
 
-### git（`<Leader>g*`）
+### lazygit
 
-| キー | 内容 |
-|---|---|
-| `<Leader>gd` | HEAD との差分（diffview） |
-| `<Leader>gf` | 現在ファイルの履歴（diffview） |
-| `<Leader>gc` | diffview を閉じる |
-| `<Leader>gD` | `:Diffview` |
-| `<Leader>gp` / `<Leader>gr` | hunk のプレビュー / リセット（gitsigns） |
-| `<Leader>gq` | 変更ファイルを quickfix へ（`:ChangedFiles [ref]`。untracked も含む） |
-| `]c` / `[c` | 次 / 前の hunk |
+files でエディタを使ってコミットを作成: `C`
 
 ### Agent 連携（`lua/config/agent.lua`）
 
@@ -147,15 +154,3 @@ Leader は `<Space>`。
 - `<Leader>ic`: Copilot CLI（`copilot`）を常駐ターミナルで開閉。`vim.g.agent_cli_cmd` で別コマンドに変更できる。
 - `<Leader>ip`: 現在ファイルのパス（`@path`）を CLI に送信。
 - Visual `<Leader>is`: 選択範囲（`@path:開始-終了` + 本文）を CLI に送信。
-
-### その他
-
-- undo tree（標準の `nvim.undotree`）: `<Leader>u`
-
-### filer（oil）
-
-カレントディレクトリへ移動: `_`
-
-### git
-
-lazygit の files でエディタを使ってコミットを作成: `C`
