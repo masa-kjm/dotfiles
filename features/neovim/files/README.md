@@ -114,7 +114,7 @@ bash features/neovim/lint.sh   # stylua / luacheck / headless smoke test（起�
 
 ## キーマップメモ
 
-Leader は `<Space>`。一覧は `<Leader>fk`（fzf-lua の keymaps ピッカー）でも検索できる。
+Leader は `<Space>`。`<Space>` を押して少し待つと which-key が候補を表示する（`g` `f` などのグループ名は `lua/plugins/ui/which-key.lua` で宣言）。一覧は `<Leader>fk`（fzf-lua の keymaps ピッカー）でも検索できる。
 
 ### `<Leader>` の体系
 
@@ -133,6 +133,7 @@ Leader は `<Space>`。一覧は `<Leader>fk`（fzf-lua の keymaps ピッカー
 
 - `]c` / `[c`: 次 / 前の hunk、`]q` / `[q`: quickfix、`<C-n>` / `<C-p>`: 次 / 前のバッファ（bufferline）、`s` / `S`: flash。
 - `gO` は標準の document symbols（aerial の toggle は `<Leader>o`）。
+- 新しい `<Leader>` グループを追加したら `lua/plugins/ui/which-key.lua` の `spec` にグループ名を足す。重複キーの検出は `:checkhealth which-key` でもできる。
 - 新しいキーを追加するときは、`utils.keymap` を使い `desc` を必ず付ける。`desc` の漏れと、あるキーが別のキーの前方一致になること（`timeoutlen` 待ちの原因）は `features/neovim/lint.sh` が検出する。
 
 ### Insert mode

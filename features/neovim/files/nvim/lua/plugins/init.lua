@@ -73,6 +73,7 @@ vim.pack.add({
   gh('nvim-lualine/lualine.nvim'),
   gh('iamcco/markdown-preview.nvim'),
   gh('nvim-zh/colorful-winsep.nvim'),
+  gh('folke/which-key.nvim'),
 }, { load = true })
 
 -- Configuration modules, loaded in order (the colorscheme goes first).
@@ -108,6 +109,7 @@ local modules = {
   'ui.lualine',
   'ui.markdown-preview',
   'ui.winsep',
+  'ui.which-key',
 }
 
 for _, name in ipairs(modules) do
