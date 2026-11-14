@@ -1,0 +1,43 @@
+tap "masa-kjm/tap"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Remote repository management made easy
+brew "ghq"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Tool for linting and static analysis of Lua code
+brew "luacheck"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Autoformat shell script source code
+brew "shfmt"
+# Microsoft SQL Server command-line interface
+# brew "sqlcmd"
+# Terminal multiplexer
+brew "tmux"
+# Extraction utility for .zip compressed archives
+brew "unzip"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Local environment manager built around explicit desired state
+brew "masa-kjm/tap/loadout", trusted: true
+# Keep local files visible in your editor but invisible to Git
+brew "masa-kjm/tap/shelfbox", trusted: true
+# OpenAI's coding agent that runs in your terminal
+cask "codex"

@@ -5,4 +5,14 @@ includes:
   - id: base
   - id: shell
 
-resources: {}
+resources:
+  homebrew:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/brew/files/Brewfile
+      target: ~/.homebrew/Brewfile
+      operation: link
+
