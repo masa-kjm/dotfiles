@@ -49,6 +49,7 @@ vim.pack.add({
   gh('stevearc/oil.nvim'),
   gh('stevearc/overseer.nvim'),
   gh('kevinhwang91/nvim-bqf'),
+  gh('folke/which-key.nvim'),
 
   -- edit
   gh('windwp/nvim-autopairs'),
@@ -57,7 +58,6 @@ vim.pack.add({
   { src = gh('kylechui/nvim-surround'), version = vim.version.range('*') },
   gh('Wansmer/treesj'),
   gh('echasnovski/mini.cursorword'),
-  gh('folke/ts-comments.nvim'),
   gh('windwp/nvim-ts-autotag'),
 
   -- git
@@ -68,17 +68,21 @@ vim.pack.add({
   gh('neovim/nvim-lspconfig'),
 
   -- ui
-  gh('folke/tokyonight.nvim'),
+  -- gh('folke/tokyonight.nvim'),
+  -- gh('rebelot/kanagawa.nvim'),
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
   gh('lukas-reineke/indent-blankline.nvim'),
   gh('nvim-lualine/lualine.nvim'),
   gh('iamcco/markdown-preview.nvim'),
   gh('nvim-zh/colorful-winsep.nvim'),
-  gh('folke/which-key.nvim'),
 }, { load = true })
 
 -- Configuration modules, loaded in order (the colorscheme goes first).
 local modules = {
-  'ui.tokyonight',
+  -- colorscheme
+  'ui.catppuccin',
+  -- 'ui.tokyonight',
+  -- 'ui.kanagawa',
 
   -- base
   'base.aerial',
@@ -89,6 +93,7 @@ local modules = {
   'base.fzf-lua',
   'base.oil',
   'base.overseer',
+  'base.which-key',
 
   -- edit
   'edit.autopairs',
@@ -97,7 +102,6 @@ local modules = {
   'edit.nvim-surround',
   'edit.treesj',
   'edit.cursorword',
-  'edit.ts-comments',
   'edit.ts-autotag',
 
   -- git
@@ -109,7 +113,6 @@ local modules = {
   'ui.lualine',
   'ui.markdown-preview',
   'ui.winsep',
-  'ui.which-key',
 }
 
 for _, name in ipairs(modules) do

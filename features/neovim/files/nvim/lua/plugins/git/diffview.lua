@@ -25,4 +25,4 @@ require('diffview').setup({
 keymap('n', '<Leader>gd', '<cmd>DiffviewOpen HEAD<CR>', { desc = 'Diff against HEAD' })
 keymap('n', '<Leader>gf', '<cmd>DiffviewFileHistory %<CR>', { desc = 'File history' })
 keymap('n', '<Leader>gc', '<cmd>DiffviewClose<CR>', { desc = 'Close diffview' })
-keymap('n', '<Leader>gD', '<cmd>Diffview<CR>', { desc = 'Open diffview' })
+-- keymap('n', '<Leader>gD', '<cmd>Diffview<CR>', { desc = 'Open diffview' })

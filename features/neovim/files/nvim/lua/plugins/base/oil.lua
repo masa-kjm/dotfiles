@@ -43,7 +43,7 @@ require('oil').setup({
       nowait = true,
       desc = 'Open terminal at the current directory',
     },
-    ['<C-l>'] = {
+    ['<Leader>l'] = {
       function()
         require('oil').select()
       end,
@@ -51,7 +51,7 @@ require('oil').setup({
       nowait = true,
       desc = 'Select file in oil',
     },
-    ['<C-h>'] = {
+    ['<Leader>h'] = {
       'actions.parent',
       mode = 'n',
       nowait = true,

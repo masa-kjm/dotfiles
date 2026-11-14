@@ -20,7 +20,7 @@ map('n', ']q', ':cnext<CR>', { desc = 'Next quickfix item' })
 map('n', '[q', ':cprev<CR>', { desc = 'Previous quickfix item' })
 
 -- <C-n> / <C-p> (buffer cycling) are defined by bufferline
-map('n', '<C-q>', '<cmd>bd<CR>', { desc = 'Delete buffer' })
+map('n', '<Leader>q', '<cmd>bd<CR>', { desc = 'Delete buffer' })
 
 -- Built-in undo tree (bundled with Neovim, loaded on demand)
 map('n', '<Leader>u', function()
