@@ -1,7 +1,4 @@
-state
-.env.bootstrap*
 tmp
-!tmp/.gitkeep
 
 # Test environment artifacts
 tests/environment/windows/logs/
