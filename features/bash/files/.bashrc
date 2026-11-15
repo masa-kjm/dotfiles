@@ -92,8 +92,6 @@ fi
 # my_setting #
 ##############
 
-eval $(dircolors -b ~/.dircolors)
-
 # Load separate shell config from .bashrc.d directory
 BASHRC_D="$HOME/.bashrc.d"
 if [ -d "$BASHRC_D" ]; then

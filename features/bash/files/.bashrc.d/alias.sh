@@ -12,7 +12,9 @@ __fzf_history() {
 	fi
 }
 # Assign(Override) history search to Ctrl-r.
-bind -x '"\C-r": __fzf_history'
+if command -v fzf >/dev/null 2>&1; then
+	bind -x '"\C-r": __fzf_history'
+fi
 
 __git_commit_browser() {
 	git log --graph --color=always \
@@ -26,25 +28,26 @@ FZF-EOF"
 }
 
 __git_diff_browser() {
-	local args="$*"
-	git diff --name-only \
-		$args |
-	fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-		--bind "ctrl-m:execute:
-			(head -1 |
-			xargs -I % sh -c 'git diff $args -- \"%\" | delta | less -R') << 'FZF-EOF'
-			{}
-FZF-EOF"
+	local -a selected=()
+	mapfile -d '' -t selected < <(
+		git diff --name-only -z "$@" |
+			fzf --read0 --print0 --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort
+	)
+	[ "${#selected[@]}" -gt 0 ] || return 1
+	git diff "$@" -- "${selected[0]}" | delta | less -R
 }
 
 __cd_fzf() {
 	local dir
-	dir=$(find ${1:-.} -path '*/\.*' -prune \
-					-o -type d -print 2> /dev/null | fzf +m) &&
-	cd "$dir"
+	dir=$(find "${1:-.}" -path '*/\.*' -prune \
+					-o -type d -print 2> /dev/null | fzf +m) || return
+	[ -n "$dir" ] || return 1
+	cd "$dir" || return
 }
 __cd_git_root() {
-	cd $(git rev-parse --show-toplevel)
+	local root
+	root=$(git rev-parse --show-toplevel) || return
+	cd "$root" || return
 }
 
 # -------------------------
@@ -171,6 +174,9 @@ __repo() {
   fi
 }
 
+alias agcd='codex resume'
+alias agcp='copilot --resume'
+alias agcs='cursor --resume'
 alias cdf="__cd_fzf"
 alias cdr="__cd_git_root"
 alias dc="docker compose"
@@ -191,6 +197,7 @@ alias gshow="__git_commit_browser"
 alias hist="history"
 alias l='ls -CF'
 alias la='ls -A'
+alias ldo='loadout'
 alias lg="lazygit"
 alias ll='ls -alF'
 alias gd="pushd"

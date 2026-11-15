@@ -1,6 +1,12 @@
+function agcd { codex resume }
+function agcp { copilot --resume }
+function agcs { cursor --resume }
+Set-Alias ldo loadout
+Set-Alias lg lazygit
+Set-Alias g git
+Set-Alias sb shelfbox
 Set-Alias vi nvim
 Set-Alias vim nvim
-Set-Alias lg lazygit
 # Set-Alias make mingw32-make
 
 # The operating system type for dotfiles configuration scripts
