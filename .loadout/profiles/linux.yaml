@@ -16,3 +16,12 @@ resources:
       target: ~/.homebrew/Brewfile
       operation: link
 
+  mise:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: features/mise/files/config.toml
+      target: ~/.config/mise/config.toml
+      operation: link

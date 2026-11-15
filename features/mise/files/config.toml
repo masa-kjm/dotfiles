@@ -1,0 +1,10 @@
+[tools]
+tree-sitter = "0.27"
+node = "26"
+"npm:yaml-language-server" = "latest"
+rust = "stable"
+rust-analyzer = "latest"
+python = "3.12"
+uv = "0.10"
+lua-language-server = "3"
+stylua = "2"
