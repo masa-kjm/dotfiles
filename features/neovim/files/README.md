@@ -15,9 +15,10 @@ Neovim 0.12 以降向けの設定。プラグイン管理は組み込みの `vim
 | lazygit | Git UI | `git-tools` feature |
 | lua-language-server / stylua / luacheck | Lua | `lua` feature |
 | rust-analyzer | Rust | `rust` feature |
-| typescript-language-server / vscode-langservers-extracted（eslint） | TS / JS | `npm` feature |
+| typescript-language-server | TS / JS | `npm` feature |
+| vscode-langservers-extracted | ESLint LSP | mise (`npm:vscode-langservers-extracted`) |
 | yaml-language-server | YAML | mise (`npm:yaml-language-server`) |
-| @github/copilot-language-server | Copilot（inline completion） | `npm` feature |
+| @github/copilot-language-server | Copilot（inline completion） | mise (`npm:@github/copilot-language-server`) |
 | ruff / basedpyright | Python（lint・format / 型チェック・補完） | `uv` feature |
 
 ## 新しい環境での初回手順

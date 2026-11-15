@@ -1,5 +1,5 @@
 -- Inline completion is enabled in config/lsp.lua. Use `:LspCopilotSignIn` (nvim-lspconfig) to sign in.
--- Install: `@github/copilot-language-server` (npm feature).
+-- Install: `npm:@github/copilot-language-server` (mise).
 ---@type vim.lsp.Config
 return {
   cmd = { 'copilot-language-server', '--stdio' },

@@ -2,6 +2,8 @@
 tree-sitter = "0.27"
 node = "26"
 "npm:yaml-language-server" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:@github/copilot-language-server" = "latest"
 rust = "stable"
 rust-analyzer = "latest"
 python = "3.12"
