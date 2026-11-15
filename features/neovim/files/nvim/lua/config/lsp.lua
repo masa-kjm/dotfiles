@@ -2,13 +2,14 @@
 -- nvim-lspconfig only supplies default server definitions.
 
 local servers = {
-  'lua_ls',
-  'rust_analyzer',
-  'ts_ls',
-  'eslint',
-  'ruff',
-  'basedpyright',
+  'basedpyright', -- python
   'copilot',
+  'eslint',
+  'lua_ls',
+  'ruff', -- python
+  'rust_analyzer',
+  'ts_ls', -- typescript
+  'yamlls',
 }
 
 vim.lsp.config('*', {
