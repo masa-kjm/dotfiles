@@ -2,46 +2,10 @@ local keymap = require('utils').keymap
 
 local overseer = require('overseer')
 
--- Get a list of folder names under overseer/template
-local function get_template_folders()
-  local template_path = vim.fn.stdpath('config') .. '/lua/overseer/template'
-  local folders = {}
-  for _, folder in ipairs(vim.fn.readdir(template_path)) do
-    if vim.fn.isdirectory(template_path .. '/' .. folder) == 1 then
-      table.insert(folders, folder)
-    end
-  end
-  return folders
-end
-local templates = get_template_folders()
-
 overseer.setup({
-  templates = {
-    'builtin',
-    unpack(templates),
-  },
   task_list = {
     direction = 'right',
     max_width = { 200, 0.8 },
-    bindings = {
-      ['?'] = 'ShowHelp',
-      -- ['<CR>'] = 'RunAction',
-      -- ['<C-e>'] = 'Edit',
-      -- ['o'] = 'Open',
-      -- ['<C-v>'] = 'OpenVsplit',
-      -- ['<C-s>'] = 'OpenSplit',
-      -- ['<C-f>'] = 'OpenFloat',
-      -- ['<C-q>'] = 'OpenQuickFix',
-      -- ['p'] = 'TogglePreview',
-      ['L'] = 'IncreaseDetail',
-      ['H'] = 'DecreaseDetail',
-      ['<M-l>'] = 'IncreaseAllDetail',
-      ['<M-h>'] = 'DecreaseAllDetail',
-      -- ['['] = 'DecreaseWidth',
-      -- [']'] = 'IncreaseWidth',
-      -- ['{'] = 'PrevTask',
-      -- ['}'] = 'NextTask',
-    },
   },
 })
 

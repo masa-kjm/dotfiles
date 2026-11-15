@@ -1,41 +1,30 @@
-local find_file_path = require('utils').find_file_path
-
 return {
-  name = 'pnpm sample',
-  builder = function(params)
+  generator = function(opts)
+    local workspace = vim.fs.find('pnpm-workspace.yaml', { upward = true, type = 'file', path = opts.dir })[1]
+    if not workspace then
+      return 'No pnpm-workspace.yaml file found'
+    end
+    local cwd = vim.fs.dirname(workspace)
     return {
-      cmd = 'pnpm',
-      args = { '-F', params.package, 'run', 'test' },
-      -- env = {
-      -- 	NODE_ENV = params.node_env or 'production',
-      -- },
-      cwd = find_file_path('Cargo.toml', false),
-      components = {
-        { 'default' },
-        -- { 'on_output_quickfix', open = true },
-        -- { 'on_result_diagnostics_quickfix', open = true },
-        { 'display_duration' },
+      {
+        name = 'pnpm sample',
+        builder = function(params)
+          return {
+            cmd = 'pnpm',
+            args = { '-F', params.package, 'run', 'test' },
+            cwd = cwd,
+            components = { 'default', 'display_duration' },
+          }
+        end,
+        params = {
+          package = {
+            type = 'string',
+            desc = 'Package to test',
+            default = 'package_prefix',
+            optional = false,
+          },
+        },
       },
-      -- on_complete = function(task)
-      -- 	vim.notify('Task Completed: ' .. task.name, vim.log.levels.INFO)
-      -- end,
     }
   end,
-  params = {
-    package = {
-      type = 'string',
-      prompt = 'Arguments',
-      default = 'package_prefix',
-      optional = false,
-      description = 'Which test tot run',
-    },
-  },
-  condition = {
-    -- filetype = { 'rs' },
-    callback = function()
-      -- Enable the task only if Cargo.toml exists
-      local path = find_file_path('Cargo.toml', false)
-      return path
-    end,
-  },
 }
