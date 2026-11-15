@@ -1,7 +1,0 @@
-description: uv Python packages for development
-depends:
-  - python
-packages:
-  # Required by Neovim (nvim/after/lsp/ruff.lua, basedpyright.lua)
-  - name: ruff
-  - name: basedpyright
