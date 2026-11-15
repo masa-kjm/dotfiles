@@ -4,8 +4,7 @@
 set -euo pipefail
 
 FEATURE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-FILES_DIR="$FEATURE_DIR/files"
-NVIM_DIR="$FILES_DIR/nvim"
+NVIM_DIR="$FEATURE_DIR/nvim"
 
 readonly COLOR_RESET='\033[0m'
 readonly COLOR_GREEN='\033[0;32m'
@@ -24,10 +23,10 @@ static_checks() {
     log_step "Validating Neovim configuration..."
 
     echo "  Running stylua..."
-    stylua --config-path "$FILES_DIR/.stylua.toml" -c "$NVIM_DIR/lua" "$NVIM_DIR/init.lua" "$FEATURE_DIR/checks"
+    stylua --config-path "$FEATURE_DIR/.stylua.toml" -c "$NVIM_DIR/lua" "$NVIM_DIR/init.lua" "$FEATURE_DIR/checks"
 
     echo "  Running luacheck..."
-    luacheck --config "$FILES_DIR/.luacheckrc" "$NVIM_DIR" "$FEATURE_DIR/checks"
+    luacheck --config "$FEATURE_DIR/.luacheckrc" "$NVIM_DIR" "$FEATURE_DIR/checks"
 
     echo "  ✓ Neovim config valid"
 }

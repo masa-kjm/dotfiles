@@ -37,6 +37,6 @@ resources:
       kind: directory
       source:
         store: dotfiles
-        path: resources/neovim/files/nvim
+        path: resources/neovim/nvim
       target: ~/.config/nvim
       operation: link
