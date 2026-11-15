@@ -4,24 +4,7 @@ id: linux
 includes:
   - id: base
   - id: shell
+  - id: brew
+  - id: mise
 
-resources:
-  homebrew:
-    type: file
-    properties:
-      kind: file
-      source:
-        store: dotfiles
-        path: resources/brew/Brewfile
-      target: ~/.homebrew/Brewfile
-      operation: link
-
-  mise:
-    type: file
-    properties:
-      kind: file
-      source:
-        store: dotfiles
-        path: resources/mise/config.toml
-      target: ~/.config/mise/config.toml
-      operation: link
+resources: {}

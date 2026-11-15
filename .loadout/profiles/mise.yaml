@@ -1,0 +1,13 @@
+schema_version: 3
+id: mise
+
+resources:
+  tools:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: resources/mise/config.toml
+      target: ~/.config/mise/config.toml
+      operation: link

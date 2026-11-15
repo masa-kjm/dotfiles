@@ -1,0 +1,13 @@
+schema_version: 3
+id: brew
+
+resources:
+  tools:
+    type: file
+    properties:
+      kind: file
+      source:
+        store: dotfiles
+        path: resources/brew/Brewfile
+      target: ~/.homebrew/Brewfile
+      operation: link
