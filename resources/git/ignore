@@ -25,3 +25,7 @@ Thumbs.db
 .env
 mise.local.toml
 *.local.md
+
+# sdd-workflow agent
+.tasks
+

@@ -12,7 +12,7 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: features/brew/files/Brewfile
+        path: resources/brew/Brewfile
       target: ~/.homebrew/Brewfile
       operation: link
 
@@ -22,6 +22,6 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: features/mise/files/config.toml
+        path: resources/mise/config.toml
       target: ~/.config/mise/config.toml
       operation: link

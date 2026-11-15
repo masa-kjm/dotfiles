@@ -8,17 +8,16 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: features/git/files/gitconfig.linux
+        path: resources/git/gitconfig.linux
       target: ~/.gitconfig
       operation: link
-  
   gitignore:
     type: file
     properties:
       kind: file
       source:
         store: dotfiles
-        path: features/git/files/ignore
+        path: resources/git/ignore
       target: ~/.config/git/ignore
       operation: link
 
@@ -28,7 +27,7 @@ resources:
       kind: directory
       source:
         store: dotfiles
-        path: features/git-tools/files/lazygit
+        path: resources/git-tools/lazygit
       target: ~/.config/lazygit
       operation: link
 
@@ -38,6 +37,6 @@ resources:
       kind: directory
       source:
         store: dotfiles
-        path: features/neovim/files/nvim
+        path: resources/neovim/files/nvim
       target: ~/.config/nvim
       operation: link

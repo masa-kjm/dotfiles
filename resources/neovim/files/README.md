@@ -70,6 +70,12 @@ Visual モードの `an` / `in` は treesitter による選択範囲の拡大 / 
 | 削除 | `vim.pack.add` から外し、`:lua vim.pack.del({ 'name' })` |
 | lockfile に合わせる | `:lua vim.pack.update(nil, { target = 'lockfile' })` |
 
+月1回を目安に、次の手順でプラグインを更新する。
+
+1. `:lua vim.pack.update()` を実行し、表示された差分を確認して `:write` で適用する。
+2. Neovim を再起動し、`:checkhealth vim.pack` と普段使う機能の動作を確認する。
+3. `nvim-pack-lock.json` の差分を確認して commit する。
+
 - ビルドが必要なプラグイン（treesitter、markdown-preview）は `PackChanged` autocmd（`lua/plugins/init.lua`）で処理している。
 - `version` を変更しても既存の clone は自動では切り替わらない。`:lua vim.pack.update({ 'name' }, { force = true })` を実行する。
 - clone が中断されて壊れた場合は、該当ディレクトリを削除して `nvim-pack-lock.json` から該当エントリを消し、再起動する。
@@ -122,7 +128,7 @@ Leader は `<Space>`。`<Space>` を押して少し待つと which-key が候補
 
 | プレフィックス | 意味 | 主なキー |
 |---|---|---|
-| `f` | find（fzf-lua） | `fn` files、`fa` live grep、`fb` buffers、`fh` help、`ff` バッファ内検索、`fd` 診断、`fs` symbols、`fm` marks、`f:` コマンド履歴、`fq` quickfix 履歴、`fr` resume、`fk` keymaps |
+| `f` | find（fzf-lua） | `fn` files、`fa` live grep、`fb` buffers、`fh` help、`ff` バッファ内検索、`fd` 全体の診断、`fD` 現在のファイルの診断、`fs` symbols、`fm` marks、`f:` コマンド履歴、`fq` quickfix 履歴、`fr` resume、`fk` keymaps |
 | `g` | git | `gd` HEAD との差分、`gf` ファイル履歴、`gc` diffview を閉じる、`gD` `:Diffview`、`gp` hunk preview、`gr` hunk reset、`gq` 変更ファイルを quickfix へ、`gl` log、`gs` status |
 | `e` | explorer（oil） | `e` カレントバッファのディレクトリ、`E` cwd |
 | `s` | session | `ss` 保存、`sl` 一覧 / 検索 |

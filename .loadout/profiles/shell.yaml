@@ -8,7 +8,7 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: features/bash/files/.bashrc
+        path: resources/bash/.bashrc
       target: ~/.bashrc
       operation: link
   bashrcd:
@@ -17,7 +17,7 @@ resources:
       kind: directory
       source:
         store: dotfiles
-        path: features/bash/files/.bashrc.d
+        path: resources/bash/.bashrc.d
       target: ~/.bashrc.d
       operation: link
 
@@ -27,6 +27,6 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: features/tmux/files/.tmux.conf
+        path: resources/tmux/.tmux.conf
       target: ~/.tmux.conf
       operation: link
