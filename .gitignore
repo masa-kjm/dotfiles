@@ -7,5 +7,4 @@ tmp
 tests/environment/windows/logs/
 tests/environment/windows/sandbox/dotfiles.wsb
 
-lazy-lock.json
 lazygit/state.yml
