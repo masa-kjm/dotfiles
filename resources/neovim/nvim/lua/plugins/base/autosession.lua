@@ -8,4 +8,4 @@ require('auto-session').setup({
   },
 })
 keymap('n', '<Leader>sl', '<cmd>SessionSearch<CR>', { desc = 'List sessions' })
-keymap('n', '<Leader>ss', '<cmd>SessionSave<CR>', { desc = 'Save session' })
+keymap('n', '<Leader>ss', '<cmd>AutoSession save<CR>', { desc = 'Save session' })
