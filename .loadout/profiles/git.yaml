@@ -1,6 +1,14 @@
 schema_version: 5
 id: git
 
+parameters:
+  gitconfig-source-path: string
+  gitconfig-target-path: string
+  gitconfig-operation: string
+  gitignore-source-path: string
+  gitignore-target-path: string
+  gitignore-operation: string
+
 resources:
   git-config:
     type: file
@@ -8,15 +16,15 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: resources/git/gitconfig.linux
-      target: ~/.gitconfig
-      operation: link
+        path: { parameter: gitconfig-source-path }
+      target: { parameter: gitconfig-target-path }
+      operation: { parameter: gitconfig-operation }
   gitignore:
     type: file
     properties:
       kind: file
       source:
         store: dotfiles
-        path: resources/git/ignore
-      target: ~/.config/git/ignore
-      operation: link
+        path: { parameter: gitignore-source-path }
+      target: { parameter: gitignore-target-path }
+      operation: { parameter: gitignore-operation }
