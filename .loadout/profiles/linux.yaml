@@ -2,9 +2,22 @@ schema_version: 5
 id: linux
 
 includes:
-  - id: base
+  - id: git
   - id: shell
   - id: brew
   - id: mise
+    with:
+      source-path: resources/mise/config.toml
+      target-path: ~/.config/mise/config.toml
+      operation: link
+  - id: neovim
+    with:
+      target-path: ~/.config/nvim
+      operation: link
+  - id: tools-git
+    with:
+      source-path: resources/git-tools/lazygit
+      target-path: ~/.config/lazygit
+      operation: link
 
 resources: {}

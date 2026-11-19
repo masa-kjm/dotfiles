@@ -1,5 +1,5 @@
 schema_version: 5
-id: base
+id: git
 
 resources:
   git-config:
@@ -19,24 +19,4 @@ resources:
         store: dotfiles
         path: resources/git/ignore
       target: ~/.config/git/ignore
-      operation: link
-
-  lazygit:
-    type: file
-    properties:
-      kind: directory
-      source:
-        store: dotfiles
-        path: resources/git-tools/lazygit
-      target: ~/.config/lazygit
-      operation: link
-
-  nvim:
-    type: file
-    properties:
-      kind: directory
-      source:
-        store: dotfiles
-        path: resources/neovim/nvim
-      target: ~/.config/nvim
       operation: link

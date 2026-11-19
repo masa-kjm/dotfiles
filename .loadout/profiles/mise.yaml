@@ -1,6 +1,11 @@
 schema_version: 5
 id: mise
 
+parameters:
+  source-path: string
+  target-path: string
+  operation: string
+
 resources:
   tools:
     type: file
@@ -8,6 +13,6 @@ resources:
       kind: file
       source:
         store: dotfiles
-        path: resources/mise/config.toml
-      target: ~/.config/mise/config.toml
-      operation: link
+        path: { parameter: source-path }
+      target: { parameter: target-path }
+      operation: { parameter: operation }

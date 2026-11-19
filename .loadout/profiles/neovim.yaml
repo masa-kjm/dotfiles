@@ -1,0 +1,17 @@
+schema_version: 5
+id: neovim
+
+parameters:
+  target-path: string
+  operation: string
+
+resources:
+  nvim:
+    type: file
+    properties:
+      kind: directory
+      source:
+        store: dotfiles
+        path: resources/neovim/nvim
+      target: { parameter: target-path }
+      operation: { parameter: operation }

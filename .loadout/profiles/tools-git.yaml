@@ -1,0 +1,18 @@
+schema_version: 5
+id: tools-git
+
+parameters:
+  source-path: string
+  target-path: string
+  operation: string
+
+resources:
+  lazygit:
+    type: file
+    properties:
+      kind: directory
+      source:
+        store: dotfiles
+        path: { parameter: source-path }
+      target: { parameter: target-path }
+      operation: { parameter: operation }
